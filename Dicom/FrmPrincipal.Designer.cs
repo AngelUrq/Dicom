@@ -32,6 +32,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnEnviarSolicitud = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCargarArchivo = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@
             this.txtMensaje = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnEnviarSolicitud = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -87,6 +87,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(316, 652);
             this.panel1.TabIndex = 1;
+            // 
+            // btnEnviarSolicitud
+            // 
+            this.btnEnviarSolicitud.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEnviarSolicitud.Location = new System.Drawing.Point(57, 286);
+            this.btnEnviarSolicitud.Name = "btnEnviarSolicitud";
+            this.btnEnviarSolicitud.Size = new System.Drawing.Size(217, 48);
+            this.btnEnviarSolicitud.TabIndex = 4;
+            this.btnEnviarSolicitud.Text = "Enviar solicitud";
+            this.btnEnviarSolicitud.UseVisualStyleBackColor = true;
+            this.btnEnviarSolicitud.Click += new System.EventHandler(this.btnEnviarSolicitud_Click);
             // 
             // pictureBox1
             // 
@@ -166,16 +177,6 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(1242, 594);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // btnEnviarSolicitud
-            // 
-            this.btnEnviarSolicitud.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEnviarSolicitud.Location = new System.Drawing.Point(57, 286);
-            this.btnEnviarSolicitud.Name = "btnEnviarSolicitud";
-            this.btnEnviarSolicitud.Size = new System.Drawing.Size(217, 48);
-            this.btnEnviarSolicitud.TabIndex = 4;
-            this.btnEnviarSolicitud.Text = "Enviar solicitud";
-            this.btnEnviarSolicitud.UseVisualStyleBackColor = true;
             // 
             // FrmPrincipal
             // 

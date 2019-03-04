@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dicom.HL7;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,6 +39,12 @@ namespace Dicom
                 string mensaje = fichero.Leer(rutaArchivo);
                 txtMensaje.Text = mensaje;
             }
+        }
+
+        private void btnEnviarSolicitud_Click(object sender, EventArgs e)
+        {
+            LectorHL7.LeerMensaje(txtMensaje.Text);
+            MessageBox.Show("¡Admisión exitosa!", "Importante");
         }
     }
 }
