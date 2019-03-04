@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dicom.database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -20,7 +21,7 @@ namespace Dicom
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmPrincipal());
+            Application.Run(new databaseconexion());
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]

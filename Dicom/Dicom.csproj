@@ -41,6 +41,7 @@
     <Reference Include="Dicom.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3a13f649e28eb09a, processorArchitecture=MSIL">
       <HintPath>..\packages\fo-dicom.Desktop.4.0.0\lib\net45\Dicom.Core.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,6 +56,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Archivos\Fichero.cs" />
+    <Compile Include="database\databaseconexion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="database\databaseconexion.Designer.cs">
+      <DependentUpon>databaseconexion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Herramientas\Consola.cs" />
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
@@ -65,6 +78,9 @@
     <Compile Include="HL7\LectorHL7.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="database\databaseconexion.resx">
+      <DependentUpon>databaseconexion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
