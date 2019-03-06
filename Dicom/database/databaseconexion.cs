@@ -1,17 +1,10 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Dicom.database
 {
-	public partial class databaseconexion : Form
+    public partial class databaseconexion : Form
 	{
 		public databaseconexion()
 		{
@@ -25,7 +18,7 @@ namespace Dicom.database
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			 MySqlConnection connection;
+			 SqlConnection connection;
 		 string server;
 		 string database;
 	     string uid;
@@ -38,7 +31,7 @@ namespace Dicom.database
 			connectionString = "SERVER=" + server + ";" + "DATABASE=" +
 			database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
-			connection = new MySqlConnection(connectionString);
+			connection = new SqlConnection(connectionString);
 			MessageBox.Show("succes");
 		}
 	}

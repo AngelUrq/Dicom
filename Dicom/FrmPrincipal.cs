@@ -46,5 +46,6 @@ namespace Dicom
             LectorHL7.LeerMensaje(txtMensaje.Text);
             MessageBox.Show("¡Admisión exitosa!", "Importante");
         }
+
     }
 }

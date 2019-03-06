@@ -21,7 +21,7 @@ namespace Dicom
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new databaseconexion());
+            Application.Run(new FrmPrincipal());
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
