@@ -13,12 +13,14 @@ namespace Dicom
 {
     public partial class FrmPrincipal : Form
     {
+        private bool leido;
         private Fichero fichero;
 
         public FrmPrincipal()
         {
             InitializeComponent();
             fichero = new Fichero();
+            leido = false;
             
         }
 
@@ -43,8 +45,18 @@ namespace Dicom
 
         private void btnEnviarSolicitud_Click(object sender, EventArgs e)
         {
-            LectorHL7.LeerMensaje(txtMensaje.Text);
-            MessageBox.Show("¡Admisión exitosa!", "Importante");
+            if (!leido)
+            {
+                LectorHL7.LeerMensaje(txtMensaje.Text);
+                MessageBox.Show("¡Admisión exitosa!", "Importante");
+                leido = true;
+            }
+            else
+            {
+                MessageBox.Show("El mensaje HL7 ya fue leido", "Advertencia");
+            }
+
+            
         }
     }
 }
