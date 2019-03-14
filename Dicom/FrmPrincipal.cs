@@ -21,7 +21,6 @@ namespace Dicom
             InitializeComponent();
             fichero = new Fichero();
             leido = false;
-            
         }
 
         private void btnLeerArchivo_Click(object sender, EventArgs e)
