@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Dicom.HL7
 {
@@ -108,9 +109,9 @@ namespace Dicom.HL7
             Hashtable definicionSegmento = BuscarSegmento(campos[0]);
 
             if (definicionSegmento != null)
-            {
                 AsociarCampos(definicionSegmento, campos);
-            }
+            else
+                MessageBox.Show("Mensaje HL7 no reconocido");
         }
 
         private static void AsociarCampos(Hashtable definicionSegmento, string[] campos)
@@ -119,7 +120,9 @@ namespace Dicom.HL7
             {
                 Consola.Imprimir(definicionSegmento[i] + " : " + campos[i]);
             }
+
             Console.WriteLine("----------------------------------------------------------------------");
+              //Consola.Imprimir(definicionSegmento[i] + ":" + campos[i]);
         }
 
         private static Hashtable BuscarSegmento(string nombreSegmento)
