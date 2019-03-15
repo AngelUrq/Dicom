@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
 namespace Dicom.database
@@ -25,21 +25,22 @@ namespace Dicom.database
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-		    /*MySqlConnection connection;
+		    MySqlConnection connection;
 		    string server;
 		    string database;
 	        string uid;
 		    string password;
-		    server = "192.168.0.19";
-		    database = "database_dicom";
-		    uid = "admin";
-		    password = "admin";
+		    server = "localhost";
+		    database = "hl7";
+		    uid = "root";
+		    password = "";
 		    string connectionString;
 		    connectionString = "SERVER=" + server + ";" + "DATABASE=" +
 		    database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
 		    connection = new MySqlConnection(connectionString);
-		    MessageBox.Show("succes");*/
+            connection.Open();
+		    MessageBox.Show("succes");
 
 		}
 	}
