@@ -7,18 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Dicom.database
+namespace Dicom.Control
 {
 	class Conexion
 	{
 		
-		public Conexion()
-		{
-			
-			
-		}
+		
 		//metodo para buscar en la base de datos 
-		public DataTable Select(string sql)
+		public DataTable Seleccionar(string sql)
 		{
 			Console.WriteLine("Connecting to MySQL...");
 			DataTable dataTable = new DataTable();
@@ -34,7 +30,8 @@ namespace Dicom.database
 			return dataTable;	
 									
 		}
-		public void Execute(string sql)
+		//método para ejecutar una order sql en la base de datos
+		public void Ejecutar(string sql)
 		{
 			Console.WriteLine("Connecting to MySQL...");
 			DataTable dataTable = new DataTable();
