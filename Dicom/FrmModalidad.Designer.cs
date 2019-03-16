@@ -30,11 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmModalidad));
             this.dgvAgendamiento = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombresPaciente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apellidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
@@ -50,47 +45,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAgendamiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAgendamiento.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.nombresPaciente,
-            this.apellidos,
-            this.fecha,
-            this.descripcion});
             this.dgvAgendamiento.GridColor = System.Drawing.SystemColors.ControlText;
             this.dgvAgendamiento.Location = new System.Drawing.Point(90, 353);
             this.dgvAgendamiento.Name = "dgvAgendamiento";
             this.dgvAgendamiento.RowTemplate.Height = 24;
             this.dgvAgendamiento.Size = new System.Drawing.Size(1043, 218);
             this.dgvAgendamiento.TabIndex = 10;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            // 
-            // nombresPaciente
-            // 
-            this.nombresPaciente.HeaderText = "Nombre paciente";
-            this.nombresPaciente.Name = "nombresPaciente";
-            this.nombresPaciente.Width = 200;
-            // 
-            // apellidos
-            // 
-            this.apellidos.HeaderText = "Apellidos paciente";
-            this.apellidos.Name = "apellidos";
-            this.apellidos.Width = 200;
-            // 
-            // fecha
-            // 
-            this.fecha.HeaderText = "Fecha de estudio";
-            this.fecha.Name = "fecha";
-            this.fecha.Width = 200;
-            // 
-            // descripcion
-            // 
-            this.descripcion.HeaderText = "Descripción";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.Width = 300;
             // 
             // button2
             // 
@@ -168,11 +128,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvAgendamiento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombresPaciente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn apellidos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
