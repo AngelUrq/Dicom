@@ -15,14 +15,12 @@ namespace Dicom
 {
     public partial class FrmPrincipal : Form
     {
-        private bool leido;
         private Fichero fichero;
 
         public FrmPrincipal()
         {
             InitializeComponent();
             fichero = new Fichero();
-            leido = false;
         }
 
         private void btnLeerArchivo_Click(object sender, EventArgs e)
@@ -46,21 +44,8 @@ namespace Dicom
 
         private void btnEnviarSolicitud_Click(object sender, EventArgs e)
         {
-            if (!leido)
-            {
-                LectorHL7 lector = new LectorHL7();
-                List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
-
-                MessageBox.Show("¡Admisión exitosa!", "Importante");
-   
-                leido = true;
-            }
-            else
-            {
-                MessageBox.Show("El mensaje HL7 ya fue leido", "Advertencia");
-            }
-
-            InsertarPaciente();
+            LectorHL7 lector = new LectorHL7();
+            List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
         }
 
         private void btnPacienteSeleccionado_Click(object sender, EventArgs e)
@@ -72,7 +57,7 @@ namespace Dicom
             }
             else
             {
-                MessageBox.Show("Debe seleccionar solamente una fila.","¡Error!");
+                MessageBox.Show("Debe seleccionar solamente una fila.", "¡Error!");
             }
         }
 

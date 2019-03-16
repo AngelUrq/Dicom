@@ -13,8 +13,8 @@ namespace Dicom.Control
 		//metodo para buscar en la base de datos 
 		public static DataTable Seleccionar(string sql)
 		{
-			
-			DataTable dataTable = new DataTable();
+            Consola.Imprimir("Ejecutando consulta: " + sql);
+            DataTable dataTable = new DataTable();
 			MySqlConnection connection;
 			string connectionString = "SERVER= localhost; DATABASE=db_agendamiento; UID= root ;PASSWORD=  ;";
 			connection = new MySqlConnection(connectionString);
@@ -30,8 +30,8 @@ namespace Dicom.Control
 		//método para ejecutar una order sql en la base de datos
 		public static void Ejecutar(string sql)
 		{
-			
-			DataTable dataTable = new DataTable();
+            Consola.Imprimir("Ejecutando consulta: " + sql);
+            DataTable dataTable = new DataTable();
 			MySqlConnection connection;
 			string connectionString = "SERVER= localhost; DATABASE=db_agendamiento; UID= root ;PASSWORD=  ;";
 			connection = new MySqlConnection(connectionString);
