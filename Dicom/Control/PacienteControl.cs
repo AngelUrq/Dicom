@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,18 @@ namespace Dicom.Control
 	{
 		
 		//insertar un paciente a la tabla Paciente
-		public void Insertar()
+		public void Insertar(Hashtable lista)
 		{
 			Paciente paciente = new Paciente();
+			string[] nombres = lista["Patient Name"].ToString().Split('^');
+			string resultado = DateTime.ParseExact(lista["Date / Time of Birth"].ToString(), "yyyyMMdd",
+				CultureInfo.InvariantCulture).ToString("yyyy/MM/dd");
+
+			DateTime pDate = Convert.ToDateTime(resultado);
+			string fecha = pDate.ToString("yyyy-MM-dd hh:mm:ss");
+
+			string sql = "INSERT INTO paciente VALUES ('" + lista["Patient ID (Internal ID)"] + "','" + nombres[1] + "','" + nombres[0] + "','" + "" + "','" + lista["Sex"] + "','" + lista["Patient Address"].ToString().Replace("^", " ") + "' ,'" + fecha + "',' " + "','" + lista["Phone Number – Home"] + "')";
+			Conexion.Ejecutar(sql);
 		}
 
         public bool VerificarPacienteExistente(Hashtable PID_LECTURA)

@@ -93,7 +93,7 @@ namespace Dicom
 
             if (!pacienteControl.VerificarPacienteExistente(PID))
             {
-                pacienteControl.Insertar();
+                pacienteControl.Insertar(PID);
             }
             else
             {
@@ -106,5 +106,19 @@ namespace Dicom
             DataTable modalidades = ModalidadControl.Listar();
             dgvModalidades.DataSource = modalidades;
         }
-    }
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			LectorHL7 lector = new LectorHL7();
+			List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
+			for (int x = 0; x < lista.Count; x++)
+			{
+				if (lista[x]["Segment Name"].ToString() == "PID")
+				{
+					PacienteControl paciente = new PacienteControl();
+					paciente.Insertar(lista[x]);
+				}
+			}
+		}
+	}
 }
