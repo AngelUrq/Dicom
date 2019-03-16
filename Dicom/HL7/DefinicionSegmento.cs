@@ -45,7 +45,7 @@ namespace Dicom.HL7
             { 6, "Event Occurred" },
         };
 
-        public static readonly Hashtable PID = new Hashtable
+        private static readonly Hashtable PID = new Hashtable
         {
             { 0, "PID" },
             { 1, "Set ID-Patient ID" },
@@ -80,7 +80,7 @@ namespace Dicom.HL7
             { 30, "Patient Death Indicator"},
         };
 
-        public static readonly Hashtable PV1 = new Hashtable
+        private static readonly Hashtable PV1 = new Hashtable
         {
             { 0, "PV1" },
             { 1, "SET ID - PV1"},
@@ -137,7 +137,7 @@ namespace Dicom.HL7
             { 52, "Other Healthcare Provider"},
         };
 
-        public static readonly Hashtable IN1 = new Hashtable
+        private static readonly Hashtable IN1 = new Hashtable
         {
             { 0, "IN1" },
             { 1, "Set ID – Patient ID"},
@@ -191,7 +191,7 @@ namespace Dicom.HL7
             { 49, "Insured’s ID Number"},
         };
 
-        public static readonly Hashtable OBR = new Hashtable
+        private static readonly Hashtable OBR = new Hashtable
         {
             { 0, "OBR" },
             { 1, "Set ID - OBR"},
@@ -239,7 +239,7 @@ namespace Dicom.HL7
             { 43, "Planned Patient Transport Comment"},
         };
 
-        public static readonly Hashtable OBX = new Hashtable
+        private static readonly Hashtable OBX = new Hashtable
         {
             { 0, "OBX" },
             { 1, "Set ID – Obx"},
