@@ -25,22 +25,22 @@ namespace Dicom.database
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-		    MySqlConnection connection;
-		    string server;
-		    string database;
-	        string uid;
-		    string password;
-		    server = "localhost";
-		    database = "db_agendamiento";
-		    uid = "root";
-		    password = "";
-		    string connectionString;
-		    connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-		    database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+			DataTable DTable = new DataTable();
+			Conexion c = new Conexion();
+			DTable = c.Select("Select * from paciente");
+			BindingSource SBind = new BindingSource();
+			SBind.DataSource = DTable;
+			
+			sqlview.AutoGenerateColumns = false;
+			sqlview.DataSource = DTable;
 
-		    connection = new MySqlConnection(connectionString);
-            connection.Open();
-		    MessageBox.Show("succes");
+			sqlview.DataSource = SBind;
+			sqlview.Refresh();
+
+		}
+
+		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
 
 		}
 	}

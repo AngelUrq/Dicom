@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Archivos\Fichero.cs" />
+    <Compile Include="database\Conexion.cs" />
     <Compile Include="database\databaseconexion.cs">
       <SubType>Form</SubType>
     </Compile>
