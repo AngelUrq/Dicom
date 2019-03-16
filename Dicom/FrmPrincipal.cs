@@ -1,4 +1,5 @@
-﻿using Dicom.HL7;
+﻿using Dicom.Control;
+using Dicom.HL7;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,16 +51,16 @@ namespace Dicom
                 LectorHL7 lector = new LectorHL7();
                 List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
 
-                string mensaje = MensajeACK.GenerarMensaje("AA", lista[0]);
-
                 MessageBox.Show("¡Admisión exitosa!", "Importante");
-                  
+   
                 leido = true;
             }
             else
             {
                 MessageBox.Show("El mensaje HL7 ya fue leido", "Advertencia");
             }
+
+            InsertarPaciente();
         }
 
         private void btnPacienteSeleccionado_Click(object sender, EventArgs e)
@@ -85,6 +86,33 @@ namespace Dicom
             else
             {
                 MessageBox.Show("Debe seleccionar solamente una fila.", "Error");
+            }
+        }
+
+        public void InsertarPaciente()
+        {
+            PacienteControl pacienteControl = new PacienteControl();
+
+            LectorHL7 lector = new LectorHL7();
+            List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
+            Hashtable PID = new Hashtable();
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i].ContainsKey(DefinicionSegmento.PID[3]))
+                {
+                    PID = lista[i];
+                    break;
+                }
+            }
+
+            if (!pacienteControl.VerificarPacienteExistente(PID))
+            {
+                pacienteControl.Insertar();
+            }
+            else
+            {
+                Consola.Imprimir(MensajeACK.GenerarMensaje("AR", lista[0]));
             }
         }
     }

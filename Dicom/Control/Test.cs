@@ -22,7 +22,7 @@ namespace Dicom.Control
 
 			DataTable DTable = new DataTable();
 			Conexion conexion = new Conexion();
-			DTable = conexion.Seleccionar("Select * from paciente");
+			//DTable = conexion.Seleccionar("Select * from paciente");
 			BindingSource SBind = new BindingSource();
 			SBind.DataSource = DTable;
 

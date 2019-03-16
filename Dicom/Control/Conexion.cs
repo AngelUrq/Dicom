@@ -11,7 +11,7 @@ namespace Dicom.Control
 	class Conexion
 	{
 		//metodo para buscar en la base de datos 
-		public DataTable Seleccionar(string sql)
+		public static DataTable Seleccionar(string sql)
 		{
 			
 			DataTable dataTable = new DataTable();
@@ -25,10 +25,10 @@ namespace Dicom.Control
 			dataTable.Load(rdr);
 			connection.Close();
 			return dataTable;
-
 		}
+
 		//método para ejecutar una order sql en la base de datos
-		public void Ejecutar(string sql)
+		public static void Ejecutar(string sql)
 		{
 			
 			DataTable dataTable = new DataTable();

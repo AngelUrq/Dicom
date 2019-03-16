@@ -45,7 +45,7 @@ namespace Dicom.HL7
             { 6, "Event Occurred" },
         };
 
-        private static readonly Hashtable PID = new Hashtable
+        public static readonly Hashtable PID = new Hashtable
         {
             { 0, "PID" },
             { 1, "Set ID-Patient ID" },
