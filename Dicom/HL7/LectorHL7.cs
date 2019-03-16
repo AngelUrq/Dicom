@@ -57,7 +57,7 @@ namespace Dicom.HL7
             Hashtable tabla = new Hashtable();
 
             Consola.Imprimir("-----" + campos[0] + "-----");
-            tabla.Add("Nombre segmento", campos[0]);
+            tabla.Add("Segment Name", campos[0]);
 
             for (int i = 1; i < campos.Length; i++)
             {
