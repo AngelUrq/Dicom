@@ -49,14 +49,15 @@ namespace Dicom
             {
                 LectorHL7 lector = new LectorHL7();
                 List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
+                string mensaje = MensajeACK.GenerarMensaje("AA", lista[0]);
                 MessageBox.Show("¡Admisión exitosa!", "Importante");
-                
+                  
                 leido = true;
             }
             else
             {
                 MessageBox.Show("El mensaje HL7 ya fue leido", "Advertencia");
-            }    
+            }
         }
 
         private void btnPacienteSeleccionado_Click(object sender, EventArgs e)

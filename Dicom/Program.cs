@@ -22,8 +22,8 @@ namespace Dicom
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Test());
-			//Application.Run(new FrmPrincipal());
+			//Application.Run(new Test());
+			Application.Run(new FrmPrincipal());
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
