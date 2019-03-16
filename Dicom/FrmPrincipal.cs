@@ -53,10 +53,20 @@ namespace Dicom
             else
             {
                 MessageBox.Show("El mensaje HL7 ya fue leido", "Advertencia");
-            }
-
-            
+            }    
         }
 
+        private void btnPacienteSeleccionado_Click(object sender, EventArgs e)
+        {
+            if (dgvAgendamiento.SelectedRows.Count == 1)
+            {
+                FrmPaciente frmPaciente = new FrmPaciente();
+                frmPaciente.Show();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar solamente una fila.","¡Error!");
+            }
+        }
     }
 }

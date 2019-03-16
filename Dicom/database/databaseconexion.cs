@@ -31,7 +31,7 @@ namespace Dicom.database
 	        string uid;
 		    string password;
 		    server = "localhost";
-		    database = "hl7";
+		    database = "db_agendamiento";
 		    uid = "root";
 		    password = "";
 		    string connectionString;
