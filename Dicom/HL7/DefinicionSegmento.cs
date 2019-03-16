@@ -191,6 +191,42 @@ namespace Dicom.HL7
             { 49, "Insured’s ID Number"},
         };
 
+        private static readonly Hashtable ORC = new Hashtable
+        {
+            { 0, "ORC" },
+            { 1, "Order Control"},
+            { 2, "Placer Order Number"},
+            { 3, "Filler Order Number"},
+            { 4, "Placer Group Number"},
+            { 5, "Order Status"},
+            { 6, "Response Flag"},
+            { 7, "Quantity/Timing"},
+            { 8, "Parent Order"},
+            { 9, "Date/Time of Transaction"},
+            { 10, "Entered By"},
+            { 11, "Verified By"},
+            { 12, "Ordering Provider"},
+            { 13, "Enterer's Location"},
+            { 14, "Call Back Phone Number"},
+            { 15, "Order Effective Date/Time"},
+            { 16, "Order Control Code Reason"},
+            { 17, "Entering Organization"},
+            { 18, "Entering Device"},
+            { 19, "Action By"},
+            { 20, "Advanced Beneficiary Notice Code"},
+            { 21, "Ordering Facility Name"},
+            { 22, "Ordering Facility Address"},
+            { 23, "Ordering Facility Phone Number"},
+            { 24, "Ordering Provider Address"},
+            { 25, "Order Status Modifier"},
+            { 26, "Advanced Beneficiary Notice Override Reason"},
+            { 27, "Filler's Expected Availability Date/Time"},
+            { 28, "Confidentiality Code"},
+            { 29, "Order Type"},
+            { 30, "Enterer Authorization Mode"},
+            { 31, "Parent Universal Service Identifier"},
+        };
+
         private static readonly Hashtable OBR = new Hashtable
         {
             { 0, "OBR" },
@@ -268,6 +304,7 @@ namespace Dicom.HL7
             PID,
             PV1,
             IN1,
+            ORC,
             OBR,
             OBX
         };

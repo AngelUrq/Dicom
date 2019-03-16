@@ -1,5 +1,6 @@
 ﻿using Dicom.HL7;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -46,8 +47,10 @@ namespace Dicom
         {
             if (!leido)
             {
-                LectorHL7.LeerMensaje(txtMensaje.Text);
+                LectorHL7 lector = new LectorHL7();
+                List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
                 MessageBox.Show("¡Admisión exitosa!", "Importante");
+                
                 leido = true;
             }
             else
