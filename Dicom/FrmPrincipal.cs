@@ -123,7 +123,10 @@ namespace Dicom
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string fecha = monthCalendar1.SelectionRange.Start.ToString("s");
 
+            dgvAgendamiento.DataSource = EstudioControl.BuscarEstudiosEnFecha(fecha);
         }
+
     }
 }
