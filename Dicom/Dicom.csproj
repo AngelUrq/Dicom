@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Archivos\Fichero.cs" />
     <Compile Include="Control\Conexion.cs" />
+    <Compile Include="Control\ModalidadControl.cs" />
     <Compile Include="Control\PacienteControl.cs" />
     <Compile Include="Control\Test.cs">
       <SubType>Form</SubType>
@@ -64,6 +65,7 @@
     <Compile Include="Control\Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\Modalidad.cs" />
     <Compile Include="Entidades\Paciente.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

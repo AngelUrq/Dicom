@@ -115,5 +115,11 @@ namespace Dicom
                 Consola.Imprimir(MensajeACK.GenerarMensaje("AR", lista[0]));
             }
         }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            DataTable modalidades = ModalidadControl.Listar();
+            dgvModalidades.DataSource = modalidades;
+        }
     }
 }

@@ -53,8 +53,6 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btnSeleccionarModalidad = new System.Windows.Forms.Button();
             this.dgvModalidades = new System.Windows.Forms.DataGridView();
-            this.idModalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
@@ -80,6 +78,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1301, 677);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
             // tabPage1
             // 
@@ -319,25 +318,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvModalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvModalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idModalidad,
-            this.modalidad});
             this.dgvModalidades.Location = new System.Drawing.Point(265, 150);
             this.dgvModalidades.Name = "dgvModalidades";
             this.dgvModalidades.RowTemplate.Height = 24;
             this.dgvModalidades.Size = new System.Drawing.Size(643, 343);
             this.dgvModalidades.TabIndex = 2;
-            // 
-            // idModalidad
-            // 
-            this.idModalidad.HeaderText = "ID";
-            this.idModalidad.Name = "idModalidad";
-            // 
-            // modalidad
-            // 
-            this.modalidad.HeaderText = "Modalidades";
-            this.modalidad.Name = "modalidad";
-            this.modalidad.Width = 500;
             // 
             // label4
             // 
@@ -414,8 +399,6 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button btnSeleccionarModalidad;
         private System.Windows.Forms.DataGridView dgvModalidades;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idModalidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn modalidad;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnPacienteSeleccionado;
