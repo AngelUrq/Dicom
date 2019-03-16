@@ -68,5 +68,18 @@ namespace Dicom
                 MessageBox.Show("Debe seleccionar solamente una fila.","¡Error!");
             }
         }
+
+        private void btnSeleccionarModalidad_Click(object sender, EventArgs e)
+        {
+            if (dgvModalidades.SelectedRows.Count == 1)
+            {
+                FrmModalidad frmModalidad = new FrmModalidad();
+                frmModalidad.Show();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar solamente una fila.", "Error");
+            }
+        }
     }
 }

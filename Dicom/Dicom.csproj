@@ -70,6 +70,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmModalidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmModalidad.Designer.cs">
+      <DependentUpon>FrmModalidad.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPaciente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="database\databaseconexion.resx">
       <DependentUpon>databaseconexion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmModalidad.resx">
+      <DependentUpon>FrmModalidad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPaciente.resx">
       <DependentUpon>FrmPaciente.cs</DependentUpon>

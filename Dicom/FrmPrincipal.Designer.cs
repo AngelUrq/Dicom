@@ -39,6 +39,7 @@
             this.btnLeerArchivo = new System.Windows.Forms.Button();
             this.txtMensaje = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnPacienteSeleccionado = new System.Windows.Forms.Button();
             this.dgvAgendamiento = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombresPaciente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,13 +51,12 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.btnSeleccionarModalidad = new System.Windows.Forms.Button();
+            this.dgvModalidades = new System.Windows.Forms.DataGridView();
             this.idModalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnPacienteSeleccionado = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -64,7 +64,7 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgendamiento)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModalidades)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -191,6 +191,17 @@
             this.tabPage2.Text = "AGENDA PRINCIPAL";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnPacienteSeleccionado
+            // 
+            this.btnPacienteSeleccionado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPacienteSeleccionado.Location = new System.Drawing.Point(847, 248);
+            this.btnPacienteSeleccionado.Name = "btnPacienteSeleccionado";
+            this.btnPacienteSeleccionado.Size = new System.Drawing.Size(254, 45);
+            this.btnPacienteSeleccionado.TabIndex = 5;
+            this.btnPacienteSeleccionado.Text = "SELECCIONAR PACIENTE";
+            this.btnPacienteSeleccionado.UseVisualStyleBackColor = true;
+            this.btnPacienteSeleccionado.Click += new System.EventHandler(this.btnPacienteSeleccionado_Click);
+            // 
             // dgvAgendamiento
             // 
             this.dgvAgendamiento.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -280,8 +291,8 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.button3);
-            this.tabPage3.Controls.Add(this.dataGridView2);
+            this.tabPage3.Controls.Add(this.btnSeleccionarModalidad);
+            this.tabPage3.Controls.Add(this.dgvModalidades);
             this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
@@ -291,31 +302,31 @@
             this.tabPage3.Text = "MODALIDADES";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnSeleccionarModalidad
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(457, 536);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(292, 47);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "SELECCIONAR";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnSeleccionarModalidad.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnSeleccionarModalidad.Location = new System.Drawing.Point(457, 536);
+            this.btnSeleccionarModalidad.Name = "btnSeleccionarModalidad";
+            this.btnSeleccionarModalidad.Size = new System.Drawing.Size(292, 47);
+            this.btnSeleccionarModalidad.TabIndex = 3;
+            this.btnSeleccionarModalidad.Text = "SELECCIONAR";
+            this.btnSeleccionarModalidad.UseVisualStyleBackColor = true;
+            this.btnSeleccionarModalidad.Click += new System.EventHandler(this.btnSeleccionarModalidad_Click);
             // 
-            // dataGridView2
+            // dgvModalidades
             // 
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvModalidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvModalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvModalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idModalidad,
             this.modalidad});
-            this.dataGridView2.Location = new System.Drawing.Point(265, 150);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(643, 343);
-            this.dataGridView2.TabIndex = 2;
+            this.dgvModalidades.Location = new System.Drawing.Point(265, 150);
+            this.dgvModalidades.Name = "dgvModalidades";
+            this.dgvModalidades.RowTemplate.Height = 24;
+            this.dgvModalidades.Size = new System.Drawing.Size(643, 343);
+            this.dgvModalidades.TabIndex = 2;
             // 
             // idModalidad
             // 
@@ -345,22 +356,11 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(468, 42);
+            this.label3.Location = new System.Drawing.Point(213, 45);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(232, 24);
             this.label3.TabIndex = 0;
             this.label3.Text = "LISTA DE MODALIDADES";
-            // 
-            // btnPacienteSeleccionado
-            // 
-            this.btnPacienteSeleccionado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPacienteSeleccionado.Location = new System.Drawing.Point(847, 248);
-            this.btnPacienteSeleccionado.Name = "btnPacienteSeleccionado";
-            this.btnPacienteSeleccionado.Size = new System.Drawing.Size(254, 45);
-            this.btnPacienteSeleccionado.TabIndex = 5;
-            this.btnPacienteSeleccionado.Text = "SELECCIONAR PACIENTE";
-            this.btnPacienteSeleccionado.UseVisualStyleBackColor = true;
-            this.btnPacienteSeleccionado.Click += new System.EventHandler(this.btnPacienteSeleccionado_Click);
             // 
             // FrmPrincipal
             // 
@@ -384,7 +384,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgendamiento)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModalidades)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -412,8 +412,8 @@
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button btnSeleccionarModalidad;
+        private System.Windows.Forms.DataGridView dgvModalidades;
         private System.Windows.Forms.DataGridViewTextBoxColumn idModalidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn modalidad;
         private System.Windows.Forms.Label label4;
