@@ -49,7 +49,9 @@ namespace Dicom
             {
                 LectorHL7 lector = new LectorHL7();
                 List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
+
                 string mensaje = MensajeACK.GenerarMensaje("AA", lista[0]);
+
                 MessageBox.Show("¡Admisión exitosa!", "Importante");
                   
                 leido = true;
