@@ -36,7 +36,7 @@ namespace Dicom
                 PacienteControl pacienteControl = new PacienteControl();
 
                 int codigoPaciente = (int) dgvAgendamiento.SelectedCells[1].Value;
-                Paciente paciente = pacienteControl.BuscarPaciente(codigoPaciente);
+                Paciente paciente = PacienteControl.BuscarPaciente(codigoPaciente);
 
                 frmPaciente.RellenarDatos(paciente);
                 frmPaciente.Show();
@@ -64,8 +64,6 @@ namespace Dicom
 
         public void InsertarPaciente()
         {
-            PacienteControl pacienteControl = new PacienteControl();
-
             LectorHL7 lector = new LectorHL7();
             List<Hashtable> lista = lector.LeerMensaje("");
             Hashtable PID = new Hashtable();
@@ -79,9 +77,9 @@ namespace Dicom
                 }
             }
 
-            if (!pacienteControl.VerificarPacienteExistente(PID))
+            if (!PacienteControl.VerificarPacienteExistente(PID))
             {
-                pacienteControl.Insertar(PID);
+                PacienteControl.Insertar(PID);
             }
             else
             {

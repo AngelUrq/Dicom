@@ -14,8 +14,8 @@ namespace Dicom.Control
 {
 	class PacienteControl
 	{
-				//insertar un paciente a la tabla Paciente
-		public void Insertar(Hashtable lista)
+
+		public static void Insertar(Hashtable lista)
 		{
 			Paciente paciente = new Paciente();
 			string[] nombres = lista["Patient Name"].ToString().Split('^');
@@ -29,7 +29,7 @@ namespace Dicom.Control
 			Conexion.Ejecutar(sql);
 		}
 
-        public bool VerificarPacienteExistente(Hashtable PID_LECTURA)
+        public static bool VerificarPacienteExistente(Hashtable PID_LECTURA)
         {
             int codigoPaciente =  Convert.ToInt32(PID_LECTURA[DefinicionSegmento.PID[3]]);
             string sql = "SELECT * FROM paciente WHERE codigo_paciente = " + codigoPaciente;
@@ -48,7 +48,7 @@ namespace Dicom.Control
 
         }
 
-        public Paciente BuscarPaciente(int codigoPaciente)
+        public static Paciente BuscarPaciente(int codigoPaciente)
         {
             string sql = "SELECT * FROM paciente WHERE codigo_paciente = " + codigoPaciente;
 
