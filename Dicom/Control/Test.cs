@@ -19,7 +19,8 @@ namespace Dicom.Control
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-
+			EstudioControl.BorrarAgendamiento("900001");
+			/*
 			DataTable DTable = new DataTable();
 			Conexion conexion = new Conexion();
 			//DTable = conexion.Seleccionar("Select * from paciente");
@@ -30,7 +31,7 @@ namespace Dicom.Control
 			sqlview.DataSource = DTable;
 
 			sqlview.DataSource = SBind;
-			sqlview.Refresh();
+			sqlview.Refresh();*/
 
 		}
 	}
