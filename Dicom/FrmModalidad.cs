@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dicom.Control;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,24 @@ namespace Dicom
 {
     public partial class FrmModalidad : Form
     {
+
+        private int codigoModalidad;
+
         public FrmModalidad()
         {
             InitializeComponent();
         }
+
+        public void CambiarCodigoModalidad(int codigoModalidad)
+        {
+            this.codigoModalidad = codigoModalidad;
+            MostrarAgenda();
+        }
+
+        private void MostrarAgenda()
+        {
+            dgvAgendamiento.DataSource = EstudioControl.BuscarEstudiosPorModalidad(codigoModalidad);
+        }
+
     }
 }

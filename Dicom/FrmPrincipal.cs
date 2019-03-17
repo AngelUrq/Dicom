@@ -53,6 +53,7 @@ namespace Dicom
             if (dgvModalidades.SelectedRows.Count == 1)
             {
                 FrmModalidad frmModalidad = new FrmModalidad();
+                frmModalidad.CambiarCodigoModalidad((int)dgvModalidades.SelectedCells[0].Value);
                 frmModalidad.Show();
             }
             else

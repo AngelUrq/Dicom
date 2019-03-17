@@ -10,9 +10,10 @@ namespace Dicom.Control
 {
     class ModalidadControl
     {
+
         public static DataTable Listar()
         {
-            string sql = "SELECT * FROM modalidad";
+            const string sql = "SELECT * FROM modalidad";
             try
             {
                 return Conexion.Seleccionar(sql);
@@ -23,7 +24,7 @@ namespace Dicom.Control
                 MessageBox.Show("Ha ocurrido un error con la conexión.");
                 return null;
             }
-            
         }
+
     }
 }

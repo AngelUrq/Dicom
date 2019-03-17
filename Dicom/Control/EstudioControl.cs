@@ -73,7 +73,27 @@ namespace Dicom.Control
 
             return null;
         }
-		//método para cancelar agendamiento
+
+        public static DataTable BuscarEstudiosPorModalidad(int codigo)
+        {
+            string sql = @"
+                SELECT paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO',modalidad.nombre AS 'MODALIDAD',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN',estudio.cancelado AS 'CANCELADO' FROM estudio
+                INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad
+                INNER JOIN paciente on estudio.codigo_paciente = paciente.codigo_paciente            
+                WHERE estudio.codigo_modalidad = " + codigo;
+
+            try
+            {
+                return Conexion.Seleccionar(sql);
+            }
+            catch (Exception e)
+            {
+                Consola.Imprimir(e.ToString());
+                MessageBox.Show("Ha ocurrido un error con la conexión.");
+                return null;
+            }
+        }
+        
 		public static void BorrarAgendamiento(string codigoEstudio)
 		{
 			string sql = "UPDATE estudio SET cancelado= '0' where codigo_estudio=" + codigoEstudio;

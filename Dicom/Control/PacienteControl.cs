@@ -41,6 +41,7 @@ namespace Dicom.Control
             }
             catch (Exception e)
             {
+                Consola.Imprimir(e.ToString());
                 MessageBox.Show("Ha ocurrido un error en la conexión.", "¡Error!");
                 return false;
             }

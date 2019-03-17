@@ -9,8 +9,6 @@ namespace Dicom.HL7
 {
     class MensajeACK
     {
-        public MensajeACK() { }
-
         public static string GenerarMensaje(string tipoACK, Hashtable MSH) {
 
             string encabezado = "MSH|";

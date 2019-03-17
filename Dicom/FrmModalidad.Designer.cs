@@ -46,7 +46,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAgendamiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAgendamiento.GridColor = System.Drawing.SystemColors.ControlText;
-            this.dgvAgendamiento.Location = new System.Drawing.Point(90, 353);
+            this.dgvAgendamiento.Location = new System.Drawing.Point(90, 350);
             this.dgvAgendamiento.Name = "dgvAgendamiento";
             this.dgvAgendamiento.RowTemplate.Height = 24;
             this.dgvAgendamiento.Size = new System.Drawing.Size(1043, 218);
