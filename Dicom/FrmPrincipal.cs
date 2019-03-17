@@ -128,5 +128,9 @@ namespace Dicom
             dgvAgendamiento.DataSource = EstudioControl.BuscarEstudiosEnFecha(fecha);
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            dgvAgendamiento.DataSource = EstudioControl.BuscarEstudios();
+        }
     }
 }
