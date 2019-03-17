@@ -73,6 +73,22 @@ namespace Dicom.Control
 
             return null;
         }
+		//método para cancelar agendamiento
+		public static void BorrarAgendamiento(string codigoEstudio)
+		{
+			string sql = "UPDATE estudio SET cancelado= '0' where codigo_estudio=" + codigoEstudio;
+			try
+			{
+				Conexion.Ejecutar(sql);
+				Consola.Imprimir("se cancelo correctamente");
+			}
+			catch(Exception e)
+			{
+				Consola.Imprimir("error al cancelar");
+			}
+			
+			
+		}
 
     }
 }

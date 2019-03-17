@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Dicom.Entidades
 {
-	class Paciente
+	public class Paciente
 	{
-
-
 		public int Codigo_Paciente { get; set; }
 		public string Nombres { get; set; }
 		public string Apellido_Paterno { get; set; }

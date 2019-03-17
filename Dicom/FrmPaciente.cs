@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dicom.Control;
+using Dicom.Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,19 @@ namespace Dicom
         public FrmPaciente()
         {
             InitializeComponent();
+        }
+
+        public void RellenarDatos(Paciente paciente)
+        {
+            txtNombres.Text = paciente.Nombres;
+            txtApellidoPaterno.Text = paciente.Apellido_Paterno;
+            txtApellidoMaterno.Text = paciente.Apellido_Materno;
+            txtGenero.Text = paciente.Genero;
+            dateTimePicker1.Text = paciente.Fecha_Nacimiento.ToShortDateString();
+            txtCodigoPais.Text = paciente.Codigo_Pais;
+            txtTelefono.Text = paciente.Telefono;
+            txtDireccion.Text = paciente.Direccion;
+            
         }
     }
 }
