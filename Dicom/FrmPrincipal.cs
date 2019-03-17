@@ -1,4 +1,5 @@
 ﻿using Dicom.Control;
+using Dicom.Entidades;
 using Dicom.HL7;
 using System;
 using System.Collections;
@@ -53,7 +54,14 @@ namespace Dicom
             if (dgvAgendamiento.SelectedRows.Count == 1)
             {
                 FrmPaciente frmPaciente = new FrmPaciente();
+                PacienteControl pacienteControl = new PacienteControl();
+
+                int codigoPaciente = (int) dgvAgendamiento.SelectedCells[1].Value;
+                Paciente paciente = pacienteControl.BuscarPaciente(codigoPaciente);
+
+                frmPaciente.RellenarDatos(paciente);
                 frmPaciente.Show();
+
             }
             else
             {

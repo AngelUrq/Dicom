@@ -14,8 +14,7 @@ namespace Dicom.Control
 {
 	class PacienteControl
 	{
-		
-		//insertar un paciente a la tabla Paciente
+				//insertar un paciente a la tabla Paciente
 		public void Insertar(Hashtable lista)
 		{
 			Paciente paciente = new Paciente();
@@ -44,6 +43,25 @@ namespace Dicom.Control
             {
                 MessageBox.Show("Ha ocurrido un error en la conexión.", "¡Error!");
                 return false;
+            }
+
+        }
+
+        public Paciente BuscarPaciente(int codigoPaciente)
+        {
+            string sql = "SELECT * FROM paciente WHERE codigo_paciente = " + codigoPaciente;
+
+            try
+            {
+                DataTable paciente = Conexion.Seleccionar(sql);
+                Paciente datos_paciente = new Paciente(codigoPaciente, paciente.Rows[0][1].ToString(), paciente.Rows[0][2].ToString(), paciente.Rows[0][3].ToString(), paciente.Rows[0][4].ToString(), paciente.Rows[0][5].ToString(), Convert.ToDateTime(paciente.Rows[0][6].ToString()), paciente.Rows[0][7].ToString(), paciente.Rows[0][8].ToString());
+                return datos_paciente;
+            }
+            catch (Exception e)
+            {
+                Consola.Imprimir(e.ToString());
+                MessageBox.Show("Ha ocurrido un error en la conexión.", "¡Error!");
+                return null;
             }
 
         }
