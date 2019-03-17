@@ -24,31 +24,6 @@ namespace Dicom
             fichero = new Fichero();
         }
 
-        private void btnLeerArchivo_Click(object sender, EventArgs e)
-        {
-            string mensaje = fichero.Leer(@"C:\Users\Adriana Orellana\source\repos\Dicom\Dicom\HL7-ORM.txt");
-            txtMensaje.Text = mensaje;
-        }
-
-        private void btnCargarArchivo_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog archivo = new OpenFileDialog();
-            string rutaArchivo = "";
-
-            if (archivo.ShowDialog() == DialogResult.OK)
-            {
-                rutaArchivo = archivo.FileName;
-                string mensaje = fichero.Leer(rutaArchivo);
-                txtMensaje.Text = mensaje;
-            }
-        }
-
-        private void btnEnviarSolicitud_Click(object sender, EventArgs e)
-        {
-            LectorHL7 lector = new LectorHL7();
-            List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
-        }
-
         private void btnPacienteSeleccionado_Click(object sender, EventArgs e)
         {
             if (dgvAgendamiento.SelectedRows.Count == 1)
@@ -87,7 +62,7 @@ namespace Dicom
             PacienteControl pacienteControl = new PacienteControl();
 
             LectorHL7 lector = new LectorHL7();
-            List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
+            List<Hashtable> lista = lector.LeerMensaje("");
             Hashtable PID = new Hashtable();
 
             for (int i = 0; i < lista.Count; i++)
@@ -114,20 +89,6 @@ namespace Dicom
             DataTable modalidades = ModalidadControl.Listar();
             dgvModalidades.DataSource = modalidades;
         }
-
-		private void button3_Click(object sender, EventArgs e)
-		{
-			LectorHL7 lector = new LectorHL7();
-			List<Hashtable> lista = lector.LeerMensaje(txtMensaje.Text);
-			for (int x = 0; x < lista.Count; x++)
-			{
-				if (lista[x]["Segment Name"].ToString() == "PID")
-				{
-					PacienteControl paciente = new PacienteControl();
-					paciente.Insertar(lista[x]);
-				}
-			}
-		}
 
         private void button1_Click(object sender, EventArgs e)
         {
