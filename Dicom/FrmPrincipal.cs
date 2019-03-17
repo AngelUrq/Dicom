@@ -1,6 +1,7 @@
 ﻿using Dicom.Control;
 using Dicom.Entidades;
 using Dicom.HL7;
+using Dicom.Servicios;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,12 +17,15 @@ namespace Dicom
 {
     public partial class FrmPrincipal : Form
     {
-        private Fichero fichero;
-
         public FrmPrincipal()
         {
             InitializeComponent();
-            fichero = new Fichero();
+            IniciarServidor();
+        }
+
+        public void IniciarServidor()
+        {
+            Servidor servidor = new Servidor();
         }
 
         private void btnPacienteSeleccionado_Click(object sender, EventArgs e)
