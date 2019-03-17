@@ -22,6 +22,9 @@ namespace Dicom.Servicios
             hilo.Start();
         }
 
+        /*
+         * Este hilo se encarga de escuchar mensajes HL7 
+         */
         public void EscucharPuerto()
         {
             string ip = "192.168.0.11";
@@ -63,58 +66,14 @@ namespace Dicom.Servicios
             }
         }
 
+        /*
+         * Este hilo se encargar de procesar mensajes
+         */
         private void ConvertirMensaje(string mensaje)
         {
-            LectorHL7 lector = new LectorHL7();
-
-            List<Hashtable> lista = lector.LeerMensaje(mensaje);
-
-            if (lector.EsValido())
-                ProcesarTipoMensaje(lista);
-            else
-                Consola.Imprimir("El mensaje no es válido");
+            ProcesadorMensaje procesadorMensaje = new ProcesadorMensaje(mensaje);
+            procesadorMensaje.Empezar();
         }
 
-        private void ProcesarTipoMensaje(List<Hashtable> lista)
-        {
-            string tipoMensaje = BuscarTipoMensaje(lista);
-
-            switch (tipoMensaje)
-            {
-                case "ADT^A01":
-                    ProcesarAdmision(lista);
-                    break;
-                default:
-                    Consola.Imprimir("No se acepta este tipo de mensaje");
-                    break;
-            }
-        }
-
-        private void ProcesarAdmision(List<Hashtable> lista)
-        {
-            foreach (Hashtable segmento in lista)
-            {
-                if (segmento["Segment Name"].Equals("PID"))
-                {
-                    Consola.Imprimir("Insertando paciente");
-                    PacienteControl.Insertar(segmento);
-                    break;
-                }
-            }
-        }
-
-        private string BuscarTipoMensaje(List<Hashtable> lista)
-        {
-            foreach (Hashtable segmento in lista)
-            {
-                if (segmento["Segment Name"].Equals("MSH"))
-                {
-                    return (string) segmento["Message Type"];
-                }
-            }
-
-            return "";
-        }
-        
     }
 }
