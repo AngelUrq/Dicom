@@ -21,7 +21,7 @@ namespace Dicom.Servicios
 
         public void EjecutarHilo()
         {
-            string ip = "127.0.0.1";
+            string ip = "192.168.0.11";
             int puerto = 52000;
             int conexionesMaximas = 10;
 
@@ -45,7 +45,7 @@ namespace Dicom.Servicios
                 Array.Resize(ref bytes, a);
                 
                 string mensaje = Encoding.UTF8.GetString(bytes);
-                Console.WriteLine("Mensaje: " + mensaje);
+                Console.WriteLine("Mensaje recibido: " + mensaje);
 
                 escuchar.Close();
                 socket.Close();
