@@ -12,10 +12,12 @@ namespace Dicom.HL7
     class LectorHL7
     {
         private List<Hashtable> lista;
+        private bool valido;
 
         public LectorHL7()
         {
             lista = new List<Hashtable>();
+            valido = true;
         }
 
         public List<Hashtable> LeerMensaje(string mensaje)
@@ -27,7 +29,7 @@ namespace Dicom.HL7
 
         private void DividirEnSegmentos(string mensaje)
         {
-            string[] segmentos = mensaje.Split('\n');
+            string[] segmentos = mensaje.Split('\r');
 
             foreach (string segmento in segmentos)
             {
@@ -48,7 +50,8 @@ namespace Dicom.HL7
             }
             else
             {
-                MessageBox.Show("No reconocido el segmento " + campos[0]);
+                Consola.Imprimir("No reconocido el segmento " + campos[0]);
+                valido = false;
             }
         }
 
@@ -56,20 +59,29 @@ namespace Dicom.HL7
         {
             Hashtable tabla = new Hashtable();
 
-            Consola.Imprimir("-----" + campos[0] + "-----");
-            tabla.Add("Segment Name", campos[0]);
-
-            for (int i = 1; i < campos.Length; i++)
+            if (campos.Length <= definicionSegmento.Count)
             {
-                if (campos[i].ToString() != "" && campos[i].ToString() != "\r")
-                {
-                    Consola.Imprimir(definicionSegmento[i] + ": " + campos[i]);
-                    tabla.Add(definicionSegmento[i], campos[i]);
-                }
-            }
+                Consola.Imprimir("-----" + campos[0] + "-----");
+                tabla.Add("Segment Name", campos[0]);
 
-            lista.Add(tabla);
-            Console.WriteLine("----------------------------------------------------------------------");
+                for (int i = 1; i < campos.Length; i++)
+                {
+                    if (campos[i] != "")
+                    {
+                        Consola.Imprimir(definicionSegmento[i] + ": " + campos[i]);
+                        tabla.Add(definicionSegmento[i], campos[i]);
+                    }
+                }
+
+                lista.Add(tabla);
+                Console.WriteLine("----------------------------------------------------------------------");
+            }
+            else
+            {
+                Consola.Imprimir("La definición de " + definicionSegmento[0] + " no concuerda con la cantidad de campos del mensaje");
+                Consola.Imprimir(campos.Length + "-" + definicionSegmento.Count);
+                valido = false;
+            }
         }
 
         private Hashtable BuscarSegmento(string nombreSegmento)
@@ -79,8 +91,13 @@ namespace Dicom.HL7
                 if (definicionSegmento[0].Equals(nombreSegmento))
                     return definicionSegmento;
             }
-
+            
             return null;
+        }
+
+        public bool EsValido()
+        {
+            return valido;
         }
 
     }
