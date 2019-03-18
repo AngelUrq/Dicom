@@ -16,7 +16,7 @@ namespace Dicom.Control
         {
             if (VerificarHorario(estudio))
             {
-                string SQL = "INSERT INTO estudio(codigo_paciente,codigo_modalidad,cancelado,fecha_inicio,fecha_fin) VALUES('" + estudio.CodigoPaciente + "','" + estudio.CodigoModalidad + "'," + estudio.Cancelado + ",'" + estudio.FechaInicio.ToString("s") + "','" + estudio.FechaFin.ToString("s") + "')";
+                string SQL = "INSERT INTO estudio(codigo_paciente,codigo_modalidad,cancelado,admitido,fecha_inicio,fecha_fin) VALUES('" + estudio.CodigoPaciente + "','" + estudio.CodigoModalidad + "'," + estudio.Cancelado + "," + estudio.Admitido + ",'" + estudio.FechaInicio.ToString("s") + "','" + estudio.FechaFin.ToString("s") + "')";
 
                 try
                 {
@@ -37,7 +37,7 @@ namespace Dicom.Control
 
         public static DataTable BuscarEstudios()
         {
-            string SQL = "SELECT * FROM estudio";
+            string SQL = "SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad ";
 
             try
             {
@@ -55,10 +55,10 @@ namespace Dicom.Control
 
         public static DataTable BuscarEstudiosEnFecha(string fecha)
         {
-            string SQL = @"SELECT paciente.nombres as 'Nombres',paciente.apellido_paterno as 'Apellido paterno',paciente.apellido_materno as 'Apellido materno',paciente.genero as 'Género',estudio.fecha_inicio as 'Fecha inicio',estudio.fecha_fin as 'Fecha fin',modalidad.nombre as 'Estudio' FROM paciente 
+            string SQL = @"SELECT  paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente 
                            INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente 
                            INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad 
-                            WHERE CAST(fecha_inicio AS DATE) = CAST('"+ fecha +"' AS DATE)";
+                           WHERE CAST(fecha_inicio AS DATE) = CAST('" + fecha + "' AS DATE)";
 
             try
             {
@@ -68,7 +68,7 @@ namespace Dicom.Control
             catch (Exception e)
             {
                 Consola.Imprimir(e.ToString());
-                MessageBox.Show("Error al consultar en la base de datos");
+                MessageBox.Show("Error al consultar en la base de datos", "Error");
             }
 
             return null;
@@ -77,10 +77,10 @@ namespace Dicom.Control
         public static DataTable BuscarEstudiosPorModalidad(int codigo)
         {
             string sql = @"
-                SELECT paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO',modalidad.nombre AS 'MODALIDAD',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN',estudio.cancelado AS 'CANCELADO' FROM estudio
+                SELECT  paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM estudio
                 INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad
                 INNER JOIN paciente on estudio.codigo_paciente = paciente.codigo_paciente            
-                WHERE estudio.codigo_modalidad = " + codigo;
+                WHERE estudio.codigo_modalidad = " + codigo + " AND estudio.admitido = '1'";
 
             try
             {
@@ -96,19 +96,53 @@ namespace Dicom.Control
         
 		public static void BorrarAgendamiento(string codigoEstudio)
 		{
-			string sql = "UPDATE estudio SET cancelado= '0' where codigo_estudio=" + codigoEstudio;
+			string sql = "UPDATE estudio SET cancelado = '1' where codigo_estudio=" + codigoEstudio;
 			try
 			{
 				Conexion.Ejecutar(sql);
-				Consola.Imprimir("se cancelo correctamente");
+				Consola.Imprimir("Se cancelo correctamente.");
 			}
 			catch(Exception e)
 			{
-				Consola.Imprimir("error al cancelar");
+				Consola.Imprimir("Error al cancelar.");
 			}
-			
-			
+
 		}
+
+        public static DataTable SeleccionarEstudiosPorFechaYModalidad(int codigoModalidad, string fechaSeleccionada)
+        {
+            DataTable datos = new DataTable();
+
+            string sql = @"SELECT  paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO', estudio.cancelado AS 'CANCELADO' FROM " +
+                "paciente INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente" +
+                " INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad" +
+                " WHERE estudio.codigo_modalidad = " + codigoModalidad + " AND CAST(fecha_inicio AS DATE) = CAST('" + fechaSeleccionada + "'AS DATE)" + " AND estudio.admitido = '1'";
+            try
+            {
+                datos = Conexion.Seleccionar(sql);
+                return datos;
+
+            }
+            catch (Exception e)
+            {
+                Consola.Imprimir(e.Message);
+                return null;
+            }
+        }
+
+        public static void AdmitirPaciente(string codigoEstudio)
+        {
+            string sql = "UPDATE estudio SET admitido = '1' where codigo_estudio=" + codigoEstudio;
+            try
+            {
+                Conexion.Ejecutar(sql);
+                Consola.Imprimir("Se admitio el estudio correctamente.");
+            }
+            catch (Exception e)
+            {
+                Consola.Imprimir("Error al cancelar.");
+            }
+        }
 
     }
 }

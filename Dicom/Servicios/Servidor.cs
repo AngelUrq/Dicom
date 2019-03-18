@@ -21,7 +21,7 @@ namespace Dicom.Servicios
 
         public void EjecutarHilo()
         {
-            string ip = "192.168.0.11";
+            string ip = "192.168.0.9";
             int puerto = 52000;
             int conexionesMaximas = 10;
 

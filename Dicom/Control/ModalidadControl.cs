@@ -10,7 +10,6 @@ namespace Dicom.Control
 {
     class ModalidadControl
     {
-
         public static DataTable Listar()
         {
             const string sql = "SELECT * FROM modalidad";
@@ -25,6 +24,5 @@ namespace Dicom.Control
                 return null;
             }
         }
-
     }
 }

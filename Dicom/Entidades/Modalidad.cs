@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dicom.Entidades
 {
-    class Modalidad
+    public class Modalidad
     {
         public int CodigoModalidad { get; set; }
         public string Nombre { get; set; }
@@ -18,6 +18,11 @@ namespace Dicom.Entidades
             CodigoModalidad = codigoModalidad;
             Nombre = nombre;
             Descripcion = descripcion;
+        }
+
+        public Modalidad(string nombre)
+        {
+            Nombre = nombre;
         }
     }
 }

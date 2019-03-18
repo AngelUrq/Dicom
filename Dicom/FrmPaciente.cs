@@ -14,12 +14,15 @@ namespace Dicom
 {
     public partial class FrmPaciente : Form
     {
+        private int codigo_modalidad;
+
         public FrmPaciente()
         {
             InitializeComponent();
+            codigo_modalidad = 0;
         }
 
-        public void RellenarDatos(Paciente paciente)
+        public void RellenarDatos(Paciente paciente, Estudio estudio, Modalidad modalidad)
         {
             txtNombres.Text = paciente.Nombres;
             txtApellidoPaterno.Text = paciente.Apellido_Paterno;
@@ -29,7 +32,22 @@ namespace Dicom
             txtCodigoPais.Text = paciente.Codigo_Pais;
             txtTelefono.Text = paciente.Telefono;
             txtDireccion.Text = paciente.Direccion;
+            txtEstudio.Text = modalidad.Nombre;
+            dateTimePicker2.Text = estudio.FechaInicio.ToShortDateString();
+            codigo_modalidad = estudio.CodigoEstudio;
             
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            EstudioControl.BorrarAgendamiento(codigo_modalidad.ToString());
+            Close();
+        }
+
+        private void btnAdmitir_Click(object sender, EventArgs e)
+        {
+            EstudioControl.AdmitirPaciente(codigo_modalidad.ToString());
+            Close();
         }
     }
 }

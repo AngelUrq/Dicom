@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dicom.Entidades
 {
-    class Estudio
+    public class Estudio
     {
 
         public int CodigoEstudio { get; set; }
@@ -14,27 +14,36 @@ namespace Dicom.Entidades
         public int CodigoModalidad { get; set; }
 
         public bool Cancelado { get; set; }
+        public bool Admitido { get; set; }
 
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
 
-        public Estudio(int codigoEstudio, int codigoPaciente, int codigoModalidad, bool cancelado, DateTime fechaInicio, DateTime fechaFin)
+        public Estudio(int codigoEstudio, int codigoPaciente, int codigoModalidad, bool cancelado, bool admitido, DateTime fechaInicio, DateTime fechaFin)
         {
             CodigoEstudio = codigoEstudio;
             CodigoPaciente = codigoPaciente;
             CodigoModalidad = codigoModalidad;
             Cancelado = cancelado;
+            Admitido = admitido;
             FechaInicio = fechaInicio;
             FechaFin = fechaFin;
         }
 
-        public Estudio(int codigoPaciente, int codigoModalidad, bool cancelado, DateTime fechaInicio, DateTime fechaFin)
+        public Estudio(int codigoPaciente, int codigoModalidad, bool cancelado, bool admitido, DateTime fechaInicio, DateTime fechaFin)
         {
             CodigoPaciente = codigoPaciente;
             CodigoModalidad = codigoModalidad;
             Cancelado = cancelado;
+            Admitido = admitido;
             FechaInicio = fechaInicio;
             FechaFin = fechaFin;
+        }
+
+        public Estudio(int codigo, DateTime fechaInicio)
+        {
+            CodigoEstudio = codigo;
+            FechaInicio = fechaInicio;
         }
 
     }

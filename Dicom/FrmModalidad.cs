@@ -13,7 +13,6 @@ namespace Dicom
 {
     public partial class FrmModalidad : Form
     {
-
         private int codigoModalidad;
 
         public FrmModalidad()
@@ -32,5 +31,14 @@ namespace Dicom
             dgvAgendamiento.DataSource = EstudioControl.BuscarEstudiosPorModalidad(codigoModalidad);
         }
 
+        private void btnListarSolicitudes_Click(object sender, EventArgs e)
+        {
+            dgvAgendamiento.DataSource = EstudioControl.BuscarEstudiosPorModalidad(codigoModalidad);
+        }
+
+        private void btnSeleccionarFechaModalidad_Click(object sender, EventArgs e)
+        {
+            dgvAgendamiento.DataSource = EstudioControl.SeleccionarEstudiosPorFechaYModalidad(codigoModalidad, monthCalendar1.SelectionRange.Start.ToString("s"));
+        }
     }
 }

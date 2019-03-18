@@ -16,7 +16,7 @@ namespace Dicom.Control
             Consola.Imprimir("Ejecutando consulta: " + sql);
             DataTable dataTable = new DataTable();
 			MySqlConnection connection;
-			string connectionString = "SERVER= localhost; DATABASE=db_agendamiento; UID= root ;PASSWORD=  ;";
+			string connectionString = "SERVER= localhost; DATABASE=db_agendamiento; UID= root ;PASSWORD=  ; Convert Zero Datetime=True";
 			connection = new MySqlConnection(connectionString);
 			connection.Open();
 
@@ -33,7 +33,7 @@ namespace Dicom.Control
             Consola.Imprimir("Ejecutando consulta: " + sql);
             DataTable dataTable = new DataTable();
 			MySqlConnection connection;
-			string connectionString = "SERVER= localhost; DATABASE=db_agendamiento; UID= root ;PASSWORD=  ;";
+			string connectionString = "SERVER= localhost; DATABASE=db_agendamiento; UID= root ;PASSWORD=  ; Convert Zero Datetime=True";
 			connection = new MySqlConnection(connectionString);
 			connection.Open();
 

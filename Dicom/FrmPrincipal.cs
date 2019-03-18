@@ -34,13 +34,24 @@ namespace Dicom
             {
                 FrmPaciente frmPaciente = new FrmPaciente();
                 PacienteControl pacienteControl = new PacienteControl();
+                try
+                {
+                    int codigoPaciente = (int)dgvAgendamiento.SelectedCells[0].Value;
+                    string fechaEstudio = monthCalendar1.SelectionRange.Start.ToString("s");
 
-                int codigoPaciente = (int) dgvAgendamiento.SelectedCells[1].Value;
-                Paciente paciente = pacienteControl.BuscarPaciente(codigoPaciente);
+                    Paciente paciente = pacienteControl.BuscarPaciente(codigoPaciente);
+                    Estudio estudio = new Estudio(Convert.ToInt32(dgvAgendamiento.SelectedCells[6].Value), Convert.ToDateTime(dgvAgendamiento.SelectedCells[7].Value));
+                    Modalidad modalidad = new Modalidad(dgvAgendamiento.SelectedCells[5].Value.ToString());
 
-                frmPaciente.RellenarDatos(paciente);
-                frmPaciente.Show();
-
+                    frmPaciente.RellenarDatos(paciente, estudio, modalidad);
+                    frmPaciente.Show();
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show("Debe seleccionar un paciente.","¡Error!");
+                    Consola.Imprimir(error.Message);
+                }
+               
             }
             else
             {

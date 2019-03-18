@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmModalidad));
             this.dgvAgendamiento = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnListarSolicitudes = new System.Windows.Forms.Button();
+            this.btnSeleccionarFechaModalidad = new System.Windows.Forms.Button();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -52,25 +52,27 @@
             this.dgvAgendamiento.Size = new System.Drawing.Size(1043, 218);
             this.dgvAgendamiento.TabIndex = 10;
             // 
-            // button2
+            // btnListarSolicitudes
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(817, 263);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(254, 45);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "LISTAR TODAS LAS SOLICITUDES";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnListarSolicitudes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnListarSolicitudes.Location = new System.Drawing.Point(817, 263);
+            this.btnListarSolicitudes.Name = "btnListarSolicitudes";
+            this.btnListarSolicitudes.Size = new System.Drawing.Size(254, 45);
+            this.btnListarSolicitudes.TabIndex = 9;
+            this.btnListarSolicitudes.Text = "LISTAR TODAS LAS SOLICITUDES";
+            this.btnListarSolicitudes.UseVisualStyleBackColor = true;
+            this.btnListarSolicitudes.Click += new System.EventHandler(this.btnListarSolicitudes_Click);
             // 
-            // button1
+            // btnSeleccionarFechaModalidad
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(817, 195);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(254, 45);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "SELECCIONAR FECHA";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSeleccionarFechaModalidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSeleccionarFechaModalidad.Location = new System.Drawing.Point(817, 195);
+            this.btnSeleccionarFechaModalidad.Name = "btnSeleccionarFechaModalidad";
+            this.btnSeleccionarFechaModalidad.Size = new System.Drawing.Size(254, 45);
+            this.btnSeleccionarFechaModalidad.TabIndex = 8;
+            this.btnSeleccionarFechaModalidad.Text = "SELECCIONAR FECHA";
+            this.btnSeleccionarFechaModalidad.UseVisualStyleBackColor = true;
+            this.btnSeleccionarFechaModalidad.Click += new System.EventHandler(this.btnSeleccionarFechaModalidad_Click);
             // 
             // monthCalendar1
             // 
@@ -110,8 +112,8 @@
             this.ClientSize = new System.Drawing.Size(1201, 612);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dgvAgendamiento);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnListarSolicitudes);
+            this.Controls.Add(this.btnSeleccionarFechaModalidad);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.label2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -129,8 +131,8 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvAgendamiento;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnListarSolicitudes;
+        private System.Windows.Forms.Button btnSeleccionarFechaModalidad;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
