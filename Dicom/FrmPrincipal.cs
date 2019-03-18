@@ -25,7 +25,7 @@ namespace Dicom
 
         public void IniciarServidor()
         {
-            Servidor servidor = new Servidor();
+            Servidor servidor = new Servidor("192.168.0.11",52000,10);
         }
 
         private void btnPacienteSeleccionado_Click(object sender, EventArgs e)

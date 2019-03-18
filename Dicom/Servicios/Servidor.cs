@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,9 +15,16 @@ namespace Dicom.Servicios
 {
     class Servidor
     {
+        private readonly string ip;
+        private readonly int puerto;
+        private readonly int conexionesMaximas;
 
-        public Servidor()
+        public Servidor(string ip, int puerto, int conexionesMaximas)
         {
+            this.ip = ip;
+            this.puerto = puerto;
+            this.conexionesMaximas = conexionesMaximas;
+
             ThreadStart delegado = new ThreadStart(EscucharPuerto);
             Thread hilo = new Thread(delegado);
             hilo.Start();
@@ -27,10 +35,6 @@ namespace Dicom.Servicios
          */
         public void EscucharPuerto()
         {
-            string ip = "192.168.0.11";
-            int puerto = 52000;
-            int conexionesMaximas = 10;
-
             Consola.Imprimir("Iniciando servidor...");
             Consola.Imprimir("IP: " + ip);
             Consola.Imprimir("Puerto: " + puerto);
@@ -56,9 +60,11 @@ namespace Dicom.Servicios
                 string mensaje = Encoding.UTF8.GetString(bytes);
                 mensaje = mensaje.Substring(2);
 
+                string clienteIP = escuchar.RemoteEndPoint.ToString();
+
                 Consola.Imprimir("Mensaje recibido");
 
-                Thread hilo = new Thread(() => ConvertirMensaje(mensaje));
+                Thread hilo = new Thread(() => ConvertirMensaje(mensaje, clienteIP));
                 hilo.Start();
 
                 escuchar.Close();
@@ -69,10 +75,27 @@ namespace Dicom.Servicios
         /*
          * Este hilo se encargar de procesar mensajes
          */
-        private void ConvertirMensaje(string mensaje)
+        private void ConvertirMensaje(string mensaje, string clienteIP)
         {
             ProcesadorMensaje procesadorMensaje = new ProcesadorMensaje(mensaje);
             procesadorMensaje.Empezar();
+
+            EnviarACK(procesadorMensaje.ObtenerTipoMensajeRespuesta(),procesadorMensaje.ObtenerMSH(), clienteIP);
+        }
+
+        private void EnviarACK(string tipoACK, Hashtable MSH, string clienteIP)
+        {
+            string mensaje = MensajeACK.GenerarMensaje(tipoACK,MSH);
+
+            clienteIP = clienteIP.Split(':')[0];
+
+            Regex regex = new Regex(@"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b");
+            Match match = regex.Match(clienteIP);
+            if (match.Success)
+            {
+                Cliente cliente = new Cliente(clienteIP,puerto);
+                cliente.EnviarMensaje(mensaje);
+            }
         }
 
     }

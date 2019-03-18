@@ -10,23 +10,44 @@ namespace Dicom.HL7
 {
     class ProcesadorMensaje
     {
-        private string mensaje;
+        private LectorHL7 lector;
 
+        private Hashtable MSH;
+
+        private readonly string mensaje;
+
+        private bool listo;
+        
         public ProcesadorMensaje(string mensaje)
         {
+            lector = new LectorHL7();
+
             this.mensaje = mensaje;
+            listo = false;
         }
 
         public void Empezar()
         {
-            LectorHL7 lector = new LectorHL7();
-
             List<Hashtable> lista = lector.LeerMensaje(mensaje);
+
+            BuscarMSH(lista);
 
             if (lector.EsValido())
                 ProcesarTipoMensaje(lista);
             else
                 Consola.Imprimir("El mensaje no es válido");
+        }
+
+        public void BuscarMSH(List<Hashtable> lista)
+        {
+            foreach (Hashtable segmento in lista)
+            {
+                if(segmento["Segment Name"].Equals("MSH"))
+                {
+                    MSH = segmento;
+                    break;
+                }
+            }
         }
 
         private void ProcesarTipoMensaje(List<Hashtable> lista)
@@ -50,8 +71,20 @@ namespace Dicom.HL7
             {
                 if (segmento["Segment Name"].Equals("PID"))
                 {
-                    Consola.Imprimir("Insertando paciente");
-                    PacienteControl.Insertar(segmento);
+                    Consola.Imprimir("Insertando paciente...");
+
+                    try
+                    {
+                        PacienteControl.Insertar(segmento);
+                        Consola.Imprimir("Paciente insertado.");
+
+                        listo = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Consola.Imprimir(e.ToString());
+                    }
+                    
                     break;
                 }
             }
@@ -70,5 +103,25 @@ namespace Dicom.HL7
             return "";
         }
         
+        public string ObtenerTipoMensajeRespuesta()
+        {
+            if (!lector.EsValido())
+            {
+                return "AE";
+            }
+            else
+            {
+                if (listo)
+                    return "AA";
+                else
+                    return "AR";
+            }
+        }
+
+        public Hashtable ObtenerMSH()
+        {
+            return MSH;
+        }
+
     }
 }

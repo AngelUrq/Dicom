@@ -1,4 +1,5 @@
 ﻿using Dicom.Entidades;
+using Dicom.Excepciones;
 using Dicom.HL7;
 using System;
 using System.Collections;
@@ -17,21 +18,30 @@ namespace Dicom.Control
 
 		public static void Insertar(Hashtable lista)
 		{
-			Paciente paciente = new Paciente();
-			string[] nombres = lista["Patient Name"].ToString().Split('^');
-			string resultado = DateTime.ParseExact(lista["Date / Time of Birth"].ToString(), "yyyyMMdd",
-				CultureInfo.InvariantCulture).ToString("yyyy/MM/dd");
+            if (!VerificarPacienteExistente(lista))
+            {
+                Paciente paciente = new Paciente();
+                string[] nombres = lista["Patient Name"].ToString().Split('^');
+                string resultado = DateTime.ParseExact(lista["Date / Time of Birth"].ToString(), "yyyyMMdd",
+                    CultureInfo.InvariantCulture).ToString("yyyy/MM/dd");
 
-			DateTime pDate = Convert.ToDateTime(resultado);
-			string fecha = pDate.ToString("yyyy-MM-dd hh:mm:ss");
+                DateTime pDate = Convert.ToDateTime(resultado);
+                string fecha = pDate.ToString("yyyy-MM-dd hh:mm:ss");
 
-			string sql = "INSERT INTO paciente VALUES ('" + lista["Patient ID (Internal ID)"] + "','" + nombres[1] + "','" + nombres[0] + "','" + "" + "','" + lista["Sex"] + "','" + lista["Patient Address"].ToString().Replace("^", " ") + "' ,'" + fecha + "',' " + "','" + lista["Phone Number – Home"] + "')";
-			Conexion.Ejecutar(sql);
+                string sql = "INSERT INTO paciente VALUES ('" + lista["Patient ID (Internal ID)"] + "','" + nombres[1] + "','" + nombres[0] + "','" + "" + "','" + lista["Sex"] + "','" + lista["Patient Address"].ToString().Replace("^", " ") + "' ,'" + fecha + "',' " + "','" + lista["Phone Number – Home"] + "')";
+                Conexion.Ejecutar(sql);
+            }
+            else
+            {
+                throw new PacienteExistenteExcepcion();
+            }
 		}
 
         public static bool VerificarPacienteExistente(Hashtable PID_LECTURA)
         {
-            int codigoPaciente =  Convert.ToInt32(PID_LECTURA[DefinicionSegmento.PID[3]]);
+            string codigoInterno = (((string)PID_LECTURA[DefinicionSegmento.PID[3]]).Split('^'))[0];
+
+            int codigoPaciente =  Convert.ToInt32(codigoInterno);
             string sql = "SELECT * FROM paciente WHERE codigo_paciente = " + codigoPaciente;
 
             try
