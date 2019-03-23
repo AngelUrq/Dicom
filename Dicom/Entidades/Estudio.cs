@@ -49,9 +49,12 @@ namespace Dicom.Entidades
             FechaFin = fechaFin;
         }
 
-        public Estudio(int codigo, DateTime fechaInicio)
+        public Estudio(int codigo, string accessionNumber, string medicoReferencia, string medicoEjercicio, DateTime fechaInicio)
         {
             CodigoEstudio = codigo;
+            NumeroDeAcceso = accessionNumber;
+            MedicoDeReferencia = medicoReferencia;
+            MedicoDeEjercicio = medicoEjercicio;
             FechaInicio = fechaInicio;
         }
 

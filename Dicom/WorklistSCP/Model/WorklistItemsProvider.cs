@@ -32,16 +32,16 @@ namespace Dicom.WorklistSCP.Model
                                Sex = dr["GENERO"].ToString(),
                                DateOfBirth = Convert.ToDateTime(dr["FECHA INICIO"]),
 
-                               AccessionNumber = "AB123",
+                               AccessionNumber = dr["ACCESSION NUMBER"].ToString(),
                                Modality = dr["MODALIDAD"].ToString(),
-                               HospitalName = null,
-                               PerformingPhysician = null,
-                               //ProcedureID = "200001",
-                               //ProcedureStepID = "200002",
-                               StudyUID = "1.2.34.567890.1234567890.1",
-                               //ScheduledAET = "MRMODALITY",
-                               //ReferringPhysician = "Smith^John^Md",
-                               ExamDateAndTime = DateTime.Now,
+                               HospitalName = "",
+                               ReferringPhysician = dr["MEDICO DE REFERENCIA"].ToString(),
+                               PerformingPhysician = dr["MEDICO DE EJERCICIO"].ToString(),
+                               ProcedureID = "",
+                               ProcedureStepID = "",
+                               StudyUID = "",
+                               ScheduledAET = "AE",
+                               ExamDateAndTime = Convert.ToDateTime(dr["FECHA INICIO"])
 
                            }).ToList();
 

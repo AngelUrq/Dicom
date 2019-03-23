@@ -12,7 +12,7 @@ namespace Dicom.Control
     {
         public static DataTable Listar()
         {
-            const string sql = "SELECT * FROM modalidad";
+            const string sql = "SELECT modalidad.codigo_modalidad AS 'CODIGO MODALIDAD', modalidad.nombre AS 'NOMBRE DE LA MODALIDAD', modalidad.descripcion AS 'DESCRIPCION' FROM modalidad";
             try
             {
                 return Conexion.Seleccionar(sql);

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dgvModalidades = new System.Windows.Forms.DataGridView();
@@ -42,6 +42,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvAgendamiento = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btnPacienteSeleccionado = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabPage3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModalidades)).BeginInit();
@@ -207,8 +207,8 @@
             this.dgvAgendamiento.Location = new System.Drawing.Point(14, 13);
             this.dgvAgendamiento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvAgendamiento.Name = "dgvAgendamiento";
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.dgvAgendamiento.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.dgvAgendamiento.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAgendamiento.RowTemplate.Height = 24;
             this.dgvAgendamiento.Size = new System.Drawing.Size(1102, 209);
             this.dgvAgendamiento.TabIndex = 4;
@@ -224,6 +224,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1301, 84);
             this.panel1.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(977, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 24);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "AGENDAMIENTO";
             // 
             // pictureBox1
             // 
@@ -324,17 +335,6 @@
             this.tabControl1.Size = new System.Drawing.Size(1301, 677);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(977, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 24);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "AGENDAMIENTO";
             // 
             // FrmPrincipal
             // 

@@ -1,4 +1,5 @@
 ﻿using Dicom.Entidades;
+using Dicom.Herramientas;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,9 +15,10 @@ namespace Dicom.Control
 
         public static void Insertar(Estudio estudio)
         {
+
             if (VerificarHorario(estudio))
             {
-                string SQL = "INSERT INTO estudio(codigo_paciente,codigo_modalidad,cancelado,admitido,fecha_inicio,fecha_fin) VALUES('" + estudio.CodigoPaciente + "','" + estudio.CodigoModalidad + "'," + estudio.Cancelado + "," + estudio.Admitido + ",'" + estudio.FechaInicio.ToString("s") + "','" + estudio.FechaFin.ToString("s") + "')";
+                string SQL = "INSERT INTO estudio(codigo_paciente,codigo_modalidad,numero_acceso,medico_referencia,medico_ejercicio,cancelado,admitido,fecha_inicio,fecha_fin) VALUES('" + estudio.CodigoPaciente + "','" + GeneradorIdentificadores.GenerarAccessionNumber() + "','" + estudio.NumeroDeAcceso + "','" + estudio.MedicoDeReferencia + "','" + estudio.MedicoDeEjercicio + "'," + estudio.Cancelado + "," + estudio.Admitido + ",'" + estudio.FechaInicio.ToString("s") + "','" + estudio.FechaFin.ToString("s") + "')";
 
                 try
                 {
@@ -37,7 +39,7 @@ namespace Dicom.Control
 
         public static DataTable BuscarEstudios()
         {
-            string SQL = "SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad WHERE estudio.admitido = '0' AND estudio.cancelado = '0'";
+            string SQL = "SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.numero_acceso AS 'ACCESSION NUMBER', estudio.codigo_estudio AS 'CODIGO ESTUDIO', estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.medico_referencia AS 'MEDICO DE REFERENCIA', estudio.medico_ejercicio AS 'MEDICO DE EJERCICIO',estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad WHERE estudio.admitido = '0' AND estudio.cancelado = '0'";
 
             try
             {
@@ -55,7 +57,7 @@ namespace Dicom.Control
 
         public static DataTable BuscarEstudiosEnFecha(string fecha)
         {
-            string SQL = @"SELECT  paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente 
+            string SQL = @"SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.numero_acceso AS 'ACCESSION NUMBER', estudio.codigo_estudio AS 'CODIGO ESTUDIO', estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.medico_referencia AS 'MEDICO DE REFERENCIA', estudio.medico_ejercicio AS 'MEDICO DE EJERCICIO',estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente 
                            INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente 
                            INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad 
                            WHERE CAST(fecha_inicio AS DATE) = CAST('" + fecha + "' AS DATE) AND estudio.admitido = '1'";
@@ -78,7 +80,7 @@ namespace Dicom.Control
         {
             string fecha = DateTime.Now.ToString("s");
             string sql = @"
-                SELECT  paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM estudio
+                SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.numero_acceso AS 'ACCESSION NUMBER', estudio.codigo_estudio AS 'CODIGO ESTUDIO', estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.medico_referencia AS 'MEDICO DE REFERENCIA', estudio.medico_ejercicio AS 'MEDICO DE EJERCICIO',estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM estudio
                 INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad
                 INNER JOIN paciente on estudio.codigo_paciente = paciente.codigo_paciente            
                 WHERE estudio.codigo_modalidad = " + codigo + " AND estudio.admitido = '1' AND CAST(estudio.fecha_inicio AS DATE) = CAST('" + fecha + "' AS DATE)";
@@ -114,7 +116,7 @@ namespace Dicom.Control
         {
             DataTable datos = new DataTable();
 
-            string sql = @"SELECT  paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO', estudio.cancelado AS 'CANCELADO' FROM " +
+            string sql = @"SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.numero_acceso AS 'ACCESSION NUMBER', estudio.codigo_estudio AS 'CODIGO ESTUDIO', estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.medico_referencia AS 'MEDICO DE REFERENCIA', estudio.medico_ejercicio AS 'MEDICO DE EJERCICIO',estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM " +
                 "paciente INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente" +
                 " INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad" +
                 " WHERE estudio.codigo_modalidad = " + codigoModalidad + " AND CAST(fecha_inicio AS DATE) = CAST('" + fechaSeleccionada + "'AS DATE)" + " AND estudio.admitido = '1'";

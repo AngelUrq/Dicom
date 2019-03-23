@@ -33,6 +33,9 @@ namespace Dicom
             txtTelefono.Text = paciente.Telefono;
             txtDireccion.Text = paciente.Direccion;
             txtEstudio.Text = modalidad.Nombre;
+            txtAccessionNumber.Text = estudio.NumeroDeAcceso;
+            txtMedicoReferencia.Text = estudio.MedicoDeReferencia;
+            txtMedicoEjercicio.Text = estudio.MedicoDeEjercicio;
             dateTimePicker2.Text = estudio.FechaInicio.ToShortDateString();
             codigo_modalidad = estudio.CodigoEstudio;
             
@@ -41,18 +44,16 @@ namespace Dicom
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             EstudioControl.BorrarAgendamiento(codigo_modalidad.ToString());
+            MessageBox.Show("Se ha cancelado la consulta", "Solicitud cancelada");
             Close();
         }
 
         private void btnAdmitir_Click(object sender, EventArgs e)
         {
             EstudioControl.AdmitirPaciente(codigo_modalidad.ToString());
+            MessageBox.Show("Se ha admitido la solicitud de estudio correctamente", "Solicitud admitida");
             Close();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
