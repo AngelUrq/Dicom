@@ -21,22 +21,30 @@ namespace Dicom.Servicios
 
         public void EnviarMensaje(string mensaje)
         {
-            Socket socket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+            try
+            {
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            IPEndPoint direccion = new IPEndPoint(IPAddress.Parse(ip),puerto);
+                IPEndPoint direccion = new IPEndPoint(IPAddress.Parse(ip), puerto);
 
-            socket.Connect(direccion);
+                socket.Connect(direccion);
 
-            Consola.Imprimir("Enviando mensaje...");
-            Consola.Imprimir(mensaje);
+                Consola.Imprimir("Enviando mensaje...");
+                Consola.Imprimir(mensaje);
 
-            byte[] bytes = Encoding.Default.GetBytes(mensaje);
+                byte[] bytes = Encoding.Default.GetBytes(mensaje);
 
-            socket.Send(bytes,0,bytes.Length,0);
+                socket.Send(bytes, 0, bytes.Length, 0);
 
-            socket.Close();
+                socket.Close();
 
-            Consola.Imprimir("Mensaje enviado. A la IP " + ip);
+                Consola.Imprimir("Mensaje enviado. A la IP " + ip);
+            }
+            catch (Exception e)
+            {
+                Consola.Imprimir("No se pudo enviar el mensaje.");
+                Consola.Imprimir(e.ToString());
+            }
         }
 
     }

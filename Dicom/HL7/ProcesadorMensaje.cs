@@ -52,6 +52,7 @@ namespace Dicom.HL7
 
         private void ProcesarTipoMensaje(List<Hashtable> lista)
         {
+            Consola.Imprimir("Mensaje separado correctamente.");
             string tipoMensaje = BuscarTipoMensaje(lista);
 
             switch (tipoMensaje)
@@ -95,7 +96,7 @@ namespace Dicom.HL7
 
         private void ProcesarOrden(List<Hashtable> lista)
         {
-
+            listo = true;
         }
 
         private string BuscarTipoMensaje(List<Hashtable> lista)
@@ -115,14 +116,14 @@ namespace Dicom.HL7
         {
             if (!lector.EsValido())
             {
-                return "AE";
+                return "AR";
             }
             else
             {
                 if (listo)
                     return "AA";
                 else
-                    return "AR";
+                    return "AE";
             }
         }
 

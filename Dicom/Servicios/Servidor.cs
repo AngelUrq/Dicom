@@ -17,6 +17,7 @@ namespace Dicom.Servicios
     {
         private readonly string IP = "192.168.0.23";
         private readonly int PUERTO = 52000;
+        private readonly int PUERTO_CLIENTE = 52000;
         private readonly int CONEXIONES_MAXIMAS = 10;
 
         /// <summary>
@@ -122,7 +123,7 @@ namespace Dicom.Servicios
             Match match = regex.Match(clienteIP);
             if (match.Success)
             {
-                Cliente cliente = new Cliente(clienteIP,PUERTO);
+                Cliente cliente = new Cliente(clienteIP,PUERTO_CLIENTE);
                 cliente.EnviarMensaje(mensaje);
             }
         }
