@@ -10,37 +10,45 @@ namespace Dicom.HL7
     class MensajeACK
     {
         public static string GenerarMensaje(string tipoACK, Hashtable MSH) {
-
-            string encabezado = "MSH|";
-            string MSA = "";
-
-            for (int i = 1; i < DefinicionSegmento.MSH.Count; i++)
+            if (MSH != null)
             {
-                if (MSH[DefinicionSegmento.MSH[i]] != null && i < MSH.Count - 1)
+                string encabezado = "MSH|";
+                string MSA = "";
+
+                for (int i = 1; i < DefinicionSegmento.MSH.Count; i++)
                 {
-                    encabezado += MSH[DefinicionSegmento.MSH[i]] + "|";
-                }
-                else if (i == MSH.Count - 1)
-                {
-                    if (MSH[DefinicionSegmento.MSH[i]] != null)
+                    if (MSH[DefinicionSegmento.MSH[i]] != null && i < MSH.Count - 1)
                     {
-                        encabezado += MSH[DefinicionSegmento.MSH[i]];
+                        encabezado += MSH[DefinicionSegmento.MSH[i]] + "|";
+                    }
+                    else if (i == MSH.Count - 1)
+                    {
+                        if (MSH[DefinicionSegmento.MSH[i]] != null)
+                        {
+                            encabezado += MSH[DefinicionSegmento.MSH[i]];
+                        }
+                        else
+                        {
+                            encabezado += "";
+                        }
+
                     }
                     else
                     {
-                        encabezado += "";
+                        encabezado += "|";
                     }
-                    
                 }
-                else
-                {
-                    encabezado += "|";
-                }
+
+                MSA += "MSA|" + tipoACK + "|" + MSH[DefinicionSegmento.MSH[10]];
+
+                return encabezado + "\n" + MSA;
+            }
+            else
+            {
+                Consola.Imprimir("Ocurrió un error con el mensaje");
             }
 
-            MSA += "MSA|" + tipoACK + "|" + MSH[DefinicionSegmento.MSH[10]];
-
-            return encabezado + "\n" + MSA;
+            return "";
         }
     }
 }

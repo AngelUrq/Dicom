@@ -35,40 +35,55 @@ namespace Dicom.Servicios
          */
         public void EscucharPuerto()
         {
-            Consola.Imprimir("Iniciando servidor...");
-            Consola.Imprimir("IP: " + ip);
-            Consola.Imprimir("Puerto: " + puerto);
-            Consola.Imprimir("Número de conexiones máximo: " + conexionesMaximas);
-
-            while (true)
+            try
             {
-                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Consola.Imprimir("Iniciando servidor...");
+                Consola.Imprimir("IP: " + ip);
+                Consola.Imprimir("Puerto: " + puerto);
+                Consola.Imprimir("Número de conexiones máximo: " + conexionesMaximas);
 
-                IPEndPoint direccion = new IPEndPoint(IPAddress.Parse(ip), puerto);
+                while (true)
+                {
+                    Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-                socket.Bind(direccion);
-                socket.Listen(conexionesMaximas);
+                    IPEndPoint direccion = new IPEndPoint(IPAddress.Parse(ip), puerto);
 
-                Socket escuchar = socket.Accept();
+                    socket.Bind(direccion);
+                    socket.Listen(conexionesMaximas);
 
-                byte[] bytes = new byte[32768];
+                    Socket escuchar = socket.Accept();
 
-                int a = escuchar.Receive(bytes, 0, bytes.Length, 0);
+                    byte[] bytes = new byte[32768];
 
-                Array.Resize(ref bytes, a);
+                    int a = escuchar.Receive(bytes, 0, bytes.Length, 0);
 
-                string mensaje = Encoding.UTF8.GetString(bytes);
-                mensaje = mensaje.Substring(2);
+                    Array.Resize(ref bytes, a);
 
-                string clienteIP = escuchar.RemoteEndPoint.ToString();
+                    string mensaje = Encoding.UTF8.GetString(bytes);
 
-                Consola.Imprimir("Mensaje recibido");
+                    if (mensaje.Length > 0)
+                    {
+                        mensaje = mensaje.Substring(2);
 
-                Thread hilo = new Thread(() => ConvertirMensaje(mensaje, clienteIP));
-                hilo.Start();
+                        string clienteIP = escuchar.RemoteEndPoint.ToString();
 
-                escuchar.Close();
-                socket.Close();
+                        Consola.Imprimir("Mensaje recibido");
+
+                        Thread hilo = new Thread(() => ConvertirMensaje(mensaje, clienteIP));
+                        hilo.Start();
+
+                        escuchar.Close();
+                        socket.Close();
+                    }
+                    else
+                    {
+                        Consola.Imprimir("Ocurrió un problema con el mensaje: " + mensaje);
+                    }
+                }
+            } catch(Exception e)
+            {
+                Consola.Imprimir("Ocurrió un problema al iniciar el puerto.");
+                Consola.Imprimir(e.ToString());
             }
         }
 
