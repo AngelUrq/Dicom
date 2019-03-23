@@ -15,41 +15,46 @@ namespace Dicom.Servicios
 {
     class Servidor
     {
-        private readonly string ip;
-        private readonly int puerto;
-        private readonly int conexionesMaximas;
+        private readonly string IP = "192.168.0.23";
+        private readonly int PUERTO = 52000;
+        private readonly int PUERTO_CLIENTE = 52000;
+        private readonly int CONEXIONES_MAXIMAS = 10;
 
-        public Servidor(string ip, int puerto, int conexionesMaximas)
+        /// <summary>
+        /// Constructor vacío
+        /// </summary>
+        public Servidor() { }
+        
+        /// <summary>
+        /// Iniciando servidor
+        /// </summary>
+        public void Iniciar()
         {
-            this.ip = ip;
-            this.puerto = puerto;
-            this.conexionesMaximas = conexionesMaximas;
-
             ThreadStart delegado = new ThreadStart(EscucharPuerto);
             Thread hilo = new Thread(delegado);
             hilo.Start();
         }
 
-        /*
-         * Este hilo se encarga de escuchar mensajes HL7 
-         */
+        /// <summary>
+        /// Este hilo se encarga de escuchar mensajes HL7 
+        /// </summary>
         public void EscucharPuerto()
         {
             try
             {
                 Consola.Imprimir("Iniciando servidor...");
-                Consola.Imprimir("IP: " + ip);
-                Consola.Imprimir("Puerto: " + puerto);
-                Consola.Imprimir("Número de conexiones máximo: " + conexionesMaximas);
+                Consola.Imprimir("IP: " + IP);
+                Consola.Imprimir("Puerto: " + PUERTO);
+                Consola.Imprimir("Número de conexiones máximo: " + CONEXIONES_MAXIMAS);
 
                 while (true)
                 {
                     Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-                    IPEndPoint direccion = new IPEndPoint(IPAddress.Parse(ip), puerto);
+                    IPEndPoint direccion = new IPEndPoint(IPAddress.Parse(IP), PUERTO);
 
                     socket.Bind(direccion);
-                    socket.Listen(conexionesMaximas);
+                    socket.Listen(CONEXIONES_MAXIMAS);
 
                     Socket escuchar = socket.Accept();
 
@@ -87,17 +92,27 @@ namespace Dicom.Servicios
             }
         }
 
-        /*
-         * Este hilo se encargar de procesar mensajes
-         */
+        /// <summary>
+        /// Este hilo convierte los mensajes
+        /// </summary>
+        /// <param name="mensaje">Mensaje a convertir</param>
+        /// <param name="clienteIP">IP al que enviar la respuesta</param>
         private void ConvertirMensaje(string mensaje, string clienteIP)
         {
+            Consola.Imprimir("Convirtiendo el mensaje...");
+
             ProcesadorMensaje procesadorMensaje = new ProcesadorMensaje(mensaje);
             procesadorMensaje.Empezar();
 
             EnviarACK(procesadorMensaje.ObtenerTipoMensajeRespuesta(),procesadorMensaje.ObtenerMSH(), clienteIP);
         }
 
+        /// <summary>
+        /// Envia el mensaje de respuesta
+        /// </summary>
+        /// <param name="tipoACK">Tipo de mensaje ACK</param>
+        /// <param name="MSH">Header del mensaje</param>
+        /// <param name="clienteIP">IP al que enviar la respuesta</param>
         private void EnviarACK(string tipoACK, Hashtable MSH, string clienteIP)
         {
             string mensaje = MensajeACK.GenerarMensaje(tipoACK,MSH);
@@ -108,7 +123,7 @@ namespace Dicom.Servicios
             Match match = regex.Match(clienteIP);
             if (match.Success)
             {
-                Cliente cliente = new Cliente(clienteIP,puerto);
+                Cliente cliente = new Cliente(clienteIP,PUERTO_CLIENTE);
                 cliente.EnviarMensaje(mensaje);
             }
         }

@@ -27,7 +27,8 @@ namespace Dicom
 
         public void IniciarServidor()
         {
-            Servidor servidor = new Servidor("127.0.0.1",52000,10);
+            Servidor servidor = new Servidor();
+            servidor.Iniciar();
         }
 
         public void IniciarWorklist()

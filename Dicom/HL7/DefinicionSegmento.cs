@@ -80,7 +80,7 @@ namespace Dicom.HL7
             { 30, "Patient Death Indicator"},
         };
 
-        private static readonly Hashtable PV1 = new Hashtable
+        public static readonly Hashtable PV1 = new Hashtable
         {
             { 0, "PV1" },
             { 1, "SET ID - PV1"},
@@ -137,7 +137,7 @@ namespace Dicom.HL7
             { 52, "Other Healthcare Provider"},
         };
 
-        private static readonly Hashtable IN1 = new Hashtable
+        public static readonly Hashtable IN1 = new Hashtable
         {
             { 0, "IN1" },
             { 1, "Set ID – Patient ID"},
@@ -191,6 +191,83 @@ namespace Dicom.HL7
             { 49, "Insured’s ID Number"},
         };
 
+        public static readonly Hashtable IN2 = new Hashtable
+        {
+            { 0, "IN2" },
+            { 1, "Insured's Employee Id"},
+            { 2, "Insured's Social Security Number"},
+            { 3, "Insured's Employer's Name And Id"},
+            { 4, "Employer Information Data"},
+            { 5, "Mail Claim Party"},
+            { 6, "Medicare Health Ins Card Number"},
+            { 7, "Medicaid Case Name"},
+            { 8, "Medicaid Case Number"},
+            { 9, "Military Sponsor Name"},
+            { 10, "Military Id Number"},
+            { 11, "Dependent Of Military Recipient"},
+            { 12, "Military Organization"},
+            { 13, "Military Station"},
+            { 14, "Military Service"},
+            { 15, "Military Rank/Grade"},
+            { 16, "Military Status"},
+            { 17, "Military Retire Date"},
+            { 18, "Military Non-avail Cert On File"},
+            { 19, "Baby Coverage"},
+            { 20, "Combine Baby Bill"},
+            { 21, "Blood Deductible"},
+            { 22, "Special Coverage Approval Name"},
+            { 23, "Special Coverage Approval Title"},
+            { 24, "Non-covered Insurance Code"},
+            { 25, "Payor Id"},
+            { 26, "Payor Subscriber Id"},
+            { 27, "Eligibility Source"},
+            { 28, "Room Coverage Type/Amount"},
+            { 29, "Policy Type/Amount"},
+            { 30, "Daily Deductible"},
+            { 31, "Living Dependency"},
+            { 32, "Ambulatory Status"},
+            { 33, "Citizenship"},
+            { 34, "Primary Language"},
+            { 35, "Living Arrangement"},
+            { 36, "Publicity Code"},
+            { 37, "Protection Indicator"},
+            { 38, "Student Indicator"},
+            { 39, "Religion"},
+            { 40, "Mother's Maiden Name"},
+            { 41, "Nationality"},
+            { 42, "Ethnic Group"},
+            { 43, "Marital Status"},
+            { 44, "Insured's Employment Start Date"},
+            { 45, "Employment Stop Date"},
+            { 46, "Job Title"},
+            { 47, "Job Code/Class"},
+            { 48, "Job Status"},
+            { 49, "Employer Contact Person Name"},
+            { 50, "Employer Contact Person Phone Number"},
+            { 51, "Employer Contact Reason"},
+            { 52, "Insured's Contact Person's Name"},
+            { 53, "Insured's Contact Person Phone Number"},
+            { 54, "Insured's Contact Person Reason"},
+            { 55, "Relationship To The Patient Start Date"},
+            { 56, "Relationship To The Patient Stop Date"},
+            { 57, "Insurance Co Contact Reason"},
+            { 58, "Insurance Co Contact Phone Number"},
+            { 59, "Policy Scope"},
+            { 60, "Policy Source"},
+            { 61, "Patient Member Number"},
+            { 62, "Guarantor's Relationship To Insured"},
+            { 63, "Insured's Phone Number - Home"},
+            { 64, "Insured's Employer Phone Number"},
+            { 65, "Military Handicapped Program"},
+            { 66, "Suspend Flag"},
+            { 67, "Copay Limit Flag"},
+            { 68, "Stoploss Limit Flag"},
+            { 69, "Insured Organization Name And Id"},
+            { 70, "Insured Employer Organization Name And Id"},
+            { 71, "Race"},
+            { 72, "Patient's Relationship To Insured"},
+        };
+
         private static readonly Hashtable ORC = new Hashtable
         {
             { 0, "ORC" },
@@ -227,7 +304,7 @@ namespace Dicom.HL7
             { 31, "Parent Universal Service Identifier"},
         };
 
-        private static readonly Hashtable OBR = new Hashtable
+        public static readonly Hashtable OBR = new Hashtable
         {
             { 0, "OBR" },
             { 1, "Set ID - OBR"},
@@ -275,7 +352,7 @@ namespace Dicom.HL7
             { 43, "Planned Patient Transport Comment"},
         };
 
-        private static readonly Hashtable OBX = new Hashtable
+        public static readonly Hashtable OBX = new Hashtable
         {
             { 0, "OBX" },
             { 1, "Set ID – Obx"},
@@ -297,16 +374,82 @@ namespace Dicom.HL7
             { 17, "Observation Method"},
         };
 
+        public static readonly Hashtable NTE = new Hashtable
+        {
+            { 0, "NTE" },
+            { 1, "Set ID - NTE"},
+            { 2, "Source of Comment"},
+            { 3, "Comment"},
+            { 4, "Comment Type"},
+        };
+
+        public static readonly Hashtable PV2 = new Hashtable
+        {
+            { 0, "PV2" },
+            { 1, "Prior Pending Location"},
+            { 2, "Accommodation Code"},
+            { 3, "Admit Reason"},
+            { 4, "Transfer Reason"},
+            { 5, "Patient Valuables"},
+            { 6, "Patient Valuables Location"},
+            { 7, "Visit User Code"},
+            { 8, "Expected Admit Date/Time"},
+            { 9, "Expected Discharge Date/Time"},
+            { 10, "Estimated Length of Inpatient Stay"},
+            { 11, "Actual Length of Inpatient Stay"},
+            { 12, "Visit Description"},
+            { 13, "Referral Source Code"},
+            { 14, "Previous Service Date"},
+            { 15, "Employment Illness Related Indicator"},
+            { 16, "Purge Status Code"},
+            { 17, "Purge Status Date"},
+            { 18, "Special Program Code"},
+            { 19, "Retention Indicator"},
+            { 20, "Expected Number of Insurance Plans"},
+            { 21, "Visit Publicity Code"},
+            { 22, "Visit Protection Indicator"},
+            { 23, "Clinic Organization Name"},
+            { 24, "Patient Status Code"},
+            { 25, "Visit Priority Code"},
+            { 26, "Previous Treatment Date"},
+            { 27, "Expected Discharge Disposition"},
+            { 28, "Signature on File Date"},
+            { 29, "First Similar Illness Date"},
+            { 30, "Patient Charge Adjustment Code"},
+            { 31, "Recurring Service Code"},
+            { 32, "Billing Media Code"},
+            { 33, "Expected Surgery Date and Time"},
+            { 34, "Military Partnership Code"},
+            { 35, "Military Non-Availability Code"},
+            { 36, "Newborn Baby Indicator"},
+            { 37, "Baby Detained Indicator"},
+            { 38, "Mode of Arrival Code"},
+            { 39, "Recreational Drug Use Code"},
+            { 40, "Admission Level of Care Code"},
+            { 41, "Precaution Code"},
+            { 42, "Patient Condition Code"},
+            { 43, "Living Will Code"},
+            { 44, "Organ Donor Code"},
+            { 45, "Advance Directive Code"},
+            { 46, "Patient Status Effective Date"},
+            { 47, "Expected LOA Return Date/Time"},
+            { 48, "Expected Pre-admission Testing Date/Time"},
+            { 49, "Notify Clergy Code"},
+        };
+
         public static readonly List<Hashtable> listaSegmentos = new List<Hashtable>
         {
             MSH,
             EVN,
             PID,
             PV1,
+            PV2,
             IN1,
+            IN2,
             ORC,
             OBR,
-            OBX
+            OBX,
+            NTE
         };
 
     }

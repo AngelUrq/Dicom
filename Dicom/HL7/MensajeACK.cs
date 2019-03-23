@@ -12,14 +12,14 @@ namespace Dicom.HL7
         public static string GenerarMensaje(string tipoACK, Hashtable MSH) {
             if (MSH != null)
             {
-                string encabezado = "MSH|";
+                string encabezado = "MSH" + Convert.ToString(MSH["Field Separator"]);
                 string MSA = "";
 
-                for (int i = 1; i < DefinicionSegmento.MSH.Count; i++)
+                for (int i = 2; i < DefinicionSegmento.MSH.Count; i++)
                 {
                     if (MSH[DefinicionSegmento.MSH[i]] != null && i < MSH.Count - 1)
                     {
-                        encabezado += MSH[DefinicionSegmento.MSH[i]] + "|";
+                        encabezado += MSH[DefinicionSegmento.MSH[i]] + Convert.ToString(MSH["Field Separator"]);
                     }
                     else if (i == MSH.Count - 1)
                     {
@@ -35,17 +35,17 @@ namespace Dicom.HL7
                     }
                     else
                     {
-                        encabezado += "|";
+                        encabezado += Convert.ToString(MSH["Field Separator"]);
                     }
                 }
 
-                MSA += "MSA|" + tipoACK + "|" + MSH[DefinicionSegmento.MSH[10]];
+                MSA += "MSA" + Convert.ToString(MSH["Field Separator"]) + tipoACK + Convert.ToString(MSH["Field Separator"]) + MSH[DefinicionSegmento.MSH[10]];
 
                 return encabezado + "\n" + MSA;
             }
             else
             {
-                Consola.Imprimir("Ocurrió un error con el mensaje");
+                Consola.Imprimir("Ocurrió un error al crear el mensaje ACK");
             }
 
             return "";
