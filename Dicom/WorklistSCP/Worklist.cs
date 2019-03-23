@@ -30,10 +30,5 @@ namespace Dicom.WorklistSCP
             WorklistServer.Start(puerto, aet);
         }
 
-        public void ObtenerLista()
-        {
-
-        }
-
     }
 }

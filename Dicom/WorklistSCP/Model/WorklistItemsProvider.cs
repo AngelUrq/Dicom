@@ -39,7 +39,8 @@ namespace Dicom.WorklistSCP.Model
                                PerformingPhysician = dr["MEDICO DE EJERCICIO"].ToString(),
                                ProcedureID = "",
                                ProcedureStepID = "",
-                               StudyUID = "",
+                               //Elegir StudyUID
+                               StudyUID = "CRMODALITY",
                                ScheduledAET = "AE",
                                ExamDateAndTime = Convert.ToDateTime(dr["FECHA INICIO"])
 
