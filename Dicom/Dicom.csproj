@@ -78,6 +78,7 @@
     <Compile Include="Control\Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Herramientas\GeneradorIdentificadores.cs" />
     <Compile Include="WorklistSCP\Model\IMppsSource.cs" />
     <Compile Include="WorklistSCP\Model\IWorklistItemsSource.cs" />
     <Compile Include="WorklistSCP\Model\MppsHandler.cs" />
@@ -88,12 +89,6 @@
     <Compile Include="Entidades\Paciente.cs" />
     <Compile Include="Entidades\WorklistItem.cs" />
     <Compile Include="Excepciones\PacienteExistenteExcepcion.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmModalidad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +117,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\Cliente.cs" />
     <Compile Include="Servicios\Servidor.cs" />
+    <Compile Include="WorklistSCP\Worklist.cs" />
     <Compile Include="WorklistSCP\WorklistServer.cs" />
     <Compile Include="WorklistSCP\WorklistService.cs" />
     <EmbeddedResource Include="Control\Test.resx">

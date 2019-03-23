@@ -2,6 +2,7 @@
 using Dicom.Entidades;
 using Dicom.HL7;
 using Dicom.Servicios;
+using Dicom.WorklistSCP;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,12 +22,18 @@ namespace Dicom
         {
             InitializeComponent();
             IniciarServidor();
+            IniciarWorklist();
         }
 
         public void IniciarServidor()
         {
             Servidor servidor = new Servidor();
             servidor.Iniciar();
+        }
+
+        public void IniciarWorklist()
+        {
+            //Worklist worklist = new Worklist(8005, "QRSCP");
         }
 
         private void btnPacienteSeleccionado_Click(object sender, EventArgs e)

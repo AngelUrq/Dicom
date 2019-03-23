@@ -15,13 +15,11 @@ namespace Dicom.WorklistSCP
         private static IDicomServer _server;
         private static Timer _itemsLoaderTimer;
 
-
         protected WorklistServer()
         {
         }
 
         public static string AETitle { get; set; }
-
 
         public static IWorklistItemsSource CreateItemsSourceService => new WorklistItemsProvider();
 
@@ -38,7 +36,6 @@ namespace Dicom.WorklistSCP
                 CurrentWorklistItems = newWorklistItems;
             }, null, TimeSpan.Zero, TimeSpan.FromSeconds(30));
         }
-
 
         public static void Stop()
         {
