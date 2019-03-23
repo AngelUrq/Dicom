@@ -1,4 +1,5 @@
 ﻿using Dicom.Control;
+using Dicom.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,6 +40,17 @@ namespace Dicom
         private void btnSeleccionarFechaModalidad_Click(object sender, EventArgs e)
         {
             dgvAgendamiento.DataSource = EstudioControl.SeleccionarEstudiosPorFechaYModalidad(codigoModalidad, monthCalendar1.SelectionRange.Start.ToString("s"));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+                Paciente paciente = new Paciente(1,"Angel", "Zenteno", "Urquidi", "Masculino", "JKFSAFJKASBF", DateTime.Today, "SDAS", "1521");
+                Modalidad modalidad = new Modalidad(2,"Tomografo", "");
+                Estudio estudio = new Estudio(2, 3, true, true, DateTime.Now, DateTime.Now);
+
+                //GeneradorArchivoDicom.GenerarArchivo("prueba.dcm",paciente, modalidad, estudio);
+            
         }
     }
 }

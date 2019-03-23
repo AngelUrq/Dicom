@@ -37,7 +37,7 @@ namespace Dicom.Control
 
         public static DataTable BuscarEstudios()
         {
-            string SQL = "SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad ";
+            string SQL = "SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad WHERE estudio.admitido = '0' AND estudio.cancelado = '0'";
 
             try
             {
@@ -58,7 +58,7 @@ namespace Dicom.Control
             string SQL = @"SELECT  paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.codigo_estudio AS 'CODIGO ESTUDIO',estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente 
                            INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente 
                            INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad 
-                           WHERE CAST(fecha_inicio AS DATE) = CAST('" + fecha + "' AS DATE)";
+                           WHERE CAST(fecha_inicio AS DATE) = CAST('" + fecha + "' AS DATE) AND estudio.admitido = '0' AND estudio.cancelado = '0'";
 
             try
             {
