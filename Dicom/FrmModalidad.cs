@@ -44,12 +44,8 @@ namespace Dicom
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-                Paciente paciente = new Paciente(1,"Angel", "Zenteno", "Urquidi", "Masculino", "JKFSAFJKASBF", DateTime.Today, "SDAS", "1521");
-                Modalidad modalidad = new Modalidad(2,"Tomografo", "");
-                Estudio estudio = new Estudio(2, 3, true, true, DateTime.Now, DateTime.Now);
 
-                //GeneradorArchivoDicom.GenerarArchivo("prueba.dcm",paciente, modalidad, estudio);
+    
             
         }
     }
