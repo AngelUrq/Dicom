@@ -36,7 +36,7 @@ namespace Dicom.Servicios
 
             socket.Close();
 
-            Consola.Imprimir("Mensaje enviado.");
+            Consola.Imprimir("Mensaje enviado. A la IP " + ip);
         }
 
     }

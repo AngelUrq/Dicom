@@ -59,6 +59,9 @@ namespace Dicom.HL7
                 case "ADT^A01":
                     ProcesarAdmision(lista);
                     break;
+                case "ORM^O01":
+                    ProcesarOrden(lista);
+                    break;
                 default:
                     Consola.Imprimir("No se acepta este tipo de mensaje");
                     break;
@@ -88,6 +91,11 @@ namespace Dicom.HL7
                     break;
                 }
             }
+        }
+
+        private void ProcesarOrden(List<Hashtable> lista)
+        {
+
         }
 
         private string BuscarTipoMensaje(List<Hashtable> lista)
