@@ -1,7 +1,10 @@
-﻿using Dicom.Entidades;
+﻿using Dicom.Control;
+using Dicom.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,81 +12,41 @@ namespace Dicom.WorklistSCP.Model
 {
     class WorklistItemsProvider : IWorklistItemsSource
     {
+        private List<WorklistItem> lista;
+
         /// <summary>
         /// This method returns some hard coded worklist items - of course they should be loaded from database or some other service
         /// </summary>
+        
         public List<WorklistItem> GetAllCurrentWorklistItems()
         {
-            var item1 = new WorklistItem
-            {
-                AccessionNumber = "AB123",
-                DateOfBirth = new DateTime(1975, 2, 14),
-                PatientID = "100015",
-                Surname = "Adriana",
-                Forename = "Orellana",
-                Sex = "M",
-                Title = null,
+            DataTable estudios =  EstudioControl.BuscarEstudiosEnFecha(DateTime.Now.ToString("s"));
 
-                Modality = "MR",
-                ExamDescription = "mr knee left",
-                ExamRoom = "MR1",
-                HospitalName = null,
-                PerformingPhysician = null,
-                ProcedureID = "200001",
-                ProcedureStepID = "200002",
-                StudyUID = "1.2.34.567890.1234567890.1",
-                ScheduledAET = "MRMODALITY",
-                ReferringPhysician = "Smith^John^Md",
-                ExamDateAndTime = DateTime.Now
-            };
+            lista = new List<WorklistItem>();
+            lista = (from DataRow dr in estudios.Rows
+                           select new WorklistItem()
+                           { 
+                               PatientID = dr["CODIGO PACIENTE"].ToString(),
+                               Surname = dr["APELLIDO PATERNO"].ToString() + " " + dr["APELLIDO MATERNO"].ToString(),
+                               Forename = dr["NOMBRES"].ToString(),
+                               Sex = dr["GENERO"].ToString(),
+                               DateOfBirth = Convert.ToDateTime(dr["FECHA INICIO"]),
 
-            var item2 = new WorklistItem
-            {
-                AccessionNumber = "AB123",
-                DateOfBirth = new DateTime(1975, 2, 14),
-                PatientID = "100015",
-                Surname = "Test",
-                Forename = "Hilbert",
-                Sex = "M",
-                Title = null,
+                               AccessionNumber = "AB123",
+                               Modality = dr["MODALIDAD"].ToString(),
+                               HospitalName = null,
+                               PerformingPhysician = null,
+                               //ProcedureID = "200001",
+                               //ProcedureStepID = "200002",
+                               StudyUID = "1.2.34.567890.1234567890.1",
+                               //ScheduledAET = "MRMODALITY",
+                               //ReferringPhysician = "Smith^John^Md",
+                               ExamDateAndTime = DateTime.Now,
 
-                Modality = "MR",
-                ExamDescription = "mr knee right",
-                ExamRoom = "MR1",
-                HospitalName = null,
-                PerformingPhysician = null,
-                ProcedureID = "200003",
-                ProcedureStepID = "200004",
-                StudyUID = "1.2.34.567890.1234567890.2",
-                ScheduledAET = "MRMODALITY",
-                ReferringPhysician = "Smith^John^Md",
-                ExamDateAndTime = DateTime.Now
-            };
+                           }).ToList();
 
-            var item3 = new WorklistItem
-            {
-                AccessionNumber = "AB125",
-                DateOfBirth = new DateTime(1984, 10, 2),
-                PatientID = "100019",
-                Surname = "Miller",
-                Forename = "Albert",
-                Sex = "M",
-                Title = null,
 
-                Modality = "CR",
-                ExamDescription = "cp",
-                ExamRoom = "CR2",
-                HospitalName = null,
-                PerformingPhysician = null,
-                ProcedureID = "200005",
-                ProcedureStepID = "200006",
-                StudyUID = "1.2.34.567890.1234567890.3",
-                ScheduledAET = "CRMODALITY",
-                ReferringPhysician = "Daniels^Jack^Md",
-                ExamDateAndTime = DateTime.Now
-            };
-
-            return new List<WorklistItem> { item1, item2, item3 };
+            return lista;
         }
 
     }

@@ -35,7 +35,6 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgendamiento)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +55,7 @@
             // btnListarSolicitudes
             // 
             this.btnListarSolicitudes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnListarSolicitudes.Location = new System.Drawing.Point(823, 233);
+            this.btnListarSolicitudes.Location = new System.Drawing.Point(823, 245);
             this.btnListarSolicitudes.Name = "btnListarSolicitudes";
             this.btnListarSolicitudes.Size = new System.Drawing.Size(254, 45);
             this.btnListarSolicitudes.TabIndex = 9;
@@ -67,7 +66,7 @@
             // btnSeleccionarFechaModalidad
             // 
             this.btnSeleccionarFechaModalidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSeleccionarFechaModalidad.Location = new System.Drawing.Point(823, 182);
+            this.btnSeleccionarFechaModalidad.Location = new System.Drawing.Point(823, 185);
             this.btnSeleccionarFechaModalidad.Name = "btnSeleccionarFechaModalidad";
             this.btnSeleccionarFechaModalidad.Size = new System.Drawing.Size(254, 45);
             this.btnSeleccionarFechaModalidad.TabIndex = 8;
@@ -106,23 +105,11 @@
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(823, 284);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(254, 45);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Prueba";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // FrmModalidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1201, 612);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dgvAgendamiento);
             this.Controls.Add(this.btnListarSolicitudes);
@@ -149,6 +136,5 @@
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
     }
 }
