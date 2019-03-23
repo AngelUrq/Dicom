@@ -52,12 +52,16 @@ namespace Dicom.HL7
 
         private void ProcesarTipoMensaje(List<Hashtable> lista)
         {
+            Consola.Imprimir("Mensaje separado correctamente.");
             string tipoMensaje = BuscarTipoMensaje(lista);
 
             switch (tipoMensaje)
             {
                 case "ADT^A01":
                     ProcesarAdmision(lista);
+                    break;
+                case "ORM^O01":
+                    ProcesarOrden(lista);
                     break;
                 default:
                     Consola.Imprimir("No se acepta este tipo de mensaje");
@@ -90,6 +94,11 @@ namespace Dicom.HL7
             }
         }
 
+        private void ProcesarOrden(List<Hashtable> lista)
+        {
+            listo = true;
+        }
+
         private string BuscarTipoMensaje(List<Hashtable> lista)
         {
             foreach (Hashtable segmento in lista)
@@ -107,14 +116,14 @@ namespace Dicom.HL7
         {
             if (!lector.EsValido())
             {
-                return "AE";
+                return "AR";
             }
             else
             {
                 if (listo)
                     return "AA";
                 else
-                    return "AR";
+                    return "AE";
             }
         }
 
