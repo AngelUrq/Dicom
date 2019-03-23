@@ -49,5 +49,10 @@ namespace Dicom
             EstudioControl.AdmitirPaciente(codigo_modalidad.ToString());
             Close();
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

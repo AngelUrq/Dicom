@@ -32,7 +32,7 @@ namespace Dicom
 
         public void IniciarWorklist()
         {
-            Worklist worklist = new Worklist(8005, "QRSCP");
+            //Worklist worklist = new Worklist(8005, "QRSCP");
         }
 
         private void btnPacienteSeleccionado_Click(object sender, EventArgs e)
