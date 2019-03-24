@@ -20,31 +20,35 @@ namespace Dicom.WorklistSCP.Model
         
         public List<WorklistItem> GetAllCurrentWorklistItems()
         {
-            DataTable estudios =  EstudioControl.BuscarEstudiosEnFecha(DateTime.Now.ToString("s"));
+            DataTable estudios =  EstudioControl.BuscarEstudiosEnFecha(DateTime.Now.ToString("s"), 1, 0);
 
             lista = new List<WorklistItem>();
             lista = (from DataRow dr in estudios.Rows
-                           select new WorklistItem()
-                           { 
-                               PatientID = dr["CODIGO PACIENTE"].ToString(),
-                               Surname = dr["APELLIDO PATERNO"].ToString() + " " + dr["APELLIDO MATERNO"].ToString(),
-                               Forename = dr["NOMBRES"].ToString(),
-                               Sex = dr["GENERO"].ToString(),
-                               DateOfBirth = Convert.ToDateTime(dr["FECHA INICIO"]),
+                     select new WorklistItem()
+                     {
+                         PatientID = dr["CODIGO PACIENTE"].ToString(),
+                         Surname = dr["APELLIDO PATERNO"].ToString() + " " + dr["APELLIDO MATERNO"].ToString(),
+                         Forename = dr["NOMBRES"].ToString(),
+                         Sex = dr["GENERO"].ToString(),
+                         DateOfBirth = Convert.ToDateTime(dr["FECHA DE NACIMIENTO"]),
 
-                               AccessionNumber = dr["ACCESSION NUMBER"].ToString(),
-                               Modality = dr["MODALIDAD"].ToString(),
-                               HospitalName = "",
-                               ReferringPhysician = dr["MEDICO DE REFERENCIA"].ToString(),
-                               PerformingPhysician = dr["MEDICO DE EJERCICIO"].ToString(),
-                               ProcedureID = "",
-                               ProcedureStepID = "",
-                               StudyUID = "",
-                               ScheduledAET = "CP",
-                               ExamDateAndTime = Convert.ToDateTime(dr["FECHA INICIO"])
+                         AccessionNumber = dr["ACCESSION NUMBER"].ToString(),
+                         Title = null,
+                         
+                         Modality = dr["DESCRIPCION"].ToString(),
+                         ExamDescription = "",
+                         ExamRoom = "",
+                         ReferringPhysician = dr["MEDICO DE REFERENCIA"].ToString(),
+                         PerformingPhysician = dr["MEDICO DE EJERCICIO"].ToString(),
+                         HospitalName = null,
+                         
+                         ProcedureID = "",
+                         ProcedureStepID = "",
+                         StudyUID = "1.2.34.567890.1234567890.1",
+                         ScheduledAET = dr["MODALIDAD"].ToString(),
+                         ExamDateAndTime = Convert.ToDateTime(dr["FECHA INICIO"])
 
-                           }).ToList();
-
+                     }).ToList();
 
             return lista;
         }

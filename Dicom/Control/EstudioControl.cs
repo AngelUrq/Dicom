@@ -39,7 +39,7 @@ namespace Dicom.Control
 
         public static DataTable BuscarEstudios()
         {
-            string SQL = "SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.numero_acceso AS 'ACCESSION NUMBER', estudio.codigo_estudio AS 'CODIGO ESTUDIO', estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.medico_referencia AS 'MEDICO DE REFERENCIA', estudio.medico_ejercicio AS 'MEDICO DE EJERCICIO',estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad WHERE estudio.admitido = '0' AND estudio.cancelado = '0'";
+            string SQL = "SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', paciente.fecha_nacimiento as 'FECHA DE NACIMIENTO', modalidad.nombre AS 'MODALIDAD', modalidad.descripcion AS 'DESCRIPCION', estudio.numero_acceso AS 'ACCESSION NUMBER', estudio.codigo_estudio AS 'CODIGO ESTUDIO', estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.medico_referencia AS 'MEDICO DE REFERENCIA', estudio.medico_ejercicio AS 'MEDICO DE EJERCICIO', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad WHERE estudio.admitido = '0' AND estudio.cancelado = '0'";
 
             try
             {
@@ -55,12 +55,12 @@ namespace Dicom.Control
             return null;
         }
 
-        public static DataTable BuscarEstudiosEnFecha(string fecha)
+        public static DataTable BuscarEstudiosEnFecha(string fecha, int admitido, int cancelado)
         {
-            string SQL = @"SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.numero_acceso AS 'ACCESSION NUMBER', estudio.codigo_estudio AS 'CODIGO ESTUDIO', estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.medico_referencia AS 'MEDICO DE REFERENCIA', estudio.medico_ejercicio AS 'MEDICO DE EJERCICIO',estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente 
+            string SQL = @"SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', paciente.fecha_nacimiento as 'FECHA DE NACIMIENTO', modalidad.nombre AS 'MODALIDAD', modalidad.descripcion AS 'DESCRIPCION', estudio.numero_acceso AS 'ACCESSION NUMBER', estudio.codigo_estudio AS 'CODIGO ESTUDIO', estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.medico_referencia AS 'MEDICO DE REFERENCIA', estudio.medico_ejercicio AS 'MEDICO DE EJERCICIO', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM paciente 
                            INNER JOIN estudio ON paciente.codigo_paciente = estudio.codigo_paciente 
                            INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad 
-                           WHERE CAST(fecha_inicio AS DATE) = CAST('" + fecha + "' AS DATE) AND estudio.admitido = '1'";
+                           WHERE CAST(fecha_inicio AS DATE) = CAST('" + fecha + "' AS DATE) AND estudio.admitido = '"+ admitido +"' AND estudio.cancelado = '" + cancelado + "'";
 
             try
             {
@@ -80,7 +80,7 @@ namespace Dicom.Control
         {
             string fecha = DateTime.Now.ToString("s");
             string sql = @"
-                SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', modalidad.nombre AS 'MODALIDAD', estudio.numero_acceso AS 'ACCESSION NUMBER', estudio.codigo_estudio AS 'CODIGO ESTUDIO', estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.medico_referencia AS 'MEDICO DE REFERENCIA', estudio.medico_ejercicio AS 'MEDICO DE EJERCICIO',estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM estudio
+                SELECT paciente.codigo_paciente as 'CODIGO PACIENTE', paciente.nombres AS 'NOMBRES',paciente.apellido_paterno AS 'APELLIDO PATERNO',paciente.apellido_materno AS 'APELLIDO MATERNO', paciente.genero as 'GENERO', paciente.fecha_nacimiento as 'FECHA DE NACIMIENTO', modalidad.nombre AS 'MODALIDAD', modalidad.descripcion AS 'DESCRIPCION', estudio.numero_acceso AS 'ACCESSION NUMBER', estudio.codigo_estudio AS 'CODIGO ESTUDIO', estudio.fecha_inicio AS 'FECHA INICIO',estudio.fecha_fin AS 'FECHA FIN', estudio.medico_referencia AS 'MEDICO DE REFERENCIA', estudio.medico_ejercicio AS 'MEDICO DE EJERCICIO', estudio.admitido AS 'ADMITIDO',estudio.cancelado AS 'CANCELADO' FROM estudio
                 INNER JOIN modalidad ON estudio.codigo_modalidad = modalidad.codigo_modalidad
                 INNER JOIN paciente on estudio.codigo_paciente = paciente.codigo_paciente            
                 WHERE estudio.codigo_modalidad = " + codigo + " AND estudio.admitido = '1' AND CAST(estudio.fecha_inicio AS DATE) = CAST('" + fecha + "' AS DATE)";

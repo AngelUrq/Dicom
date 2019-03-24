@@ -45,11 +45,10 @@ namespace Dicom
                 try
                 {
                     int codigoPaciente = (int)dgvAgendamiento.SelectedCells[0].Value;
-                    string fechaEstudio = monthCalendar1.SelectionRange.Start.ToString("s");
                     
                     Paciente paciente = PacienteControl.BuscarPaciente(codigoPaciente);
-                    Estudio estudio = new Estudio(Convert.ToInt32(dgvAgendamiento.SelectedCells[7].Value), dgvAgendamiento.SelectedCells[6].Value.ToString(), dgvAgendamiento.SelectedCells[10].Value.ToString(), dgvAgendamiento.SelectedCells[11].Value.ToString(), Convert.ToDateTime(dgvAgendamiento.SelectedCells[8].Value));
-                    Modalidad modalidad = new Modalidad(dgvAgendamiento.SelectedCells[5].Value.ToString());
+                    Estudio estudio = new Estudio(Convert.ToInt32(dgvAgendamiento.SelectedCells[9].Value), dgvAgendamiento.SelectedCells[8].Value.ToString(), dgvAgendamiento.SelectedCells[12].Value.ToString(), dgvAgendamiento.SelectedCells[13].Value.ToString(), Convert.ToDateTime(dgvAgendamiento.SelectedCells[10].Value));
+                    Modalidad modalidad = new Modalidad(dgvAgendamiento.SelectedCells[6].Value.ToString());
 
                     frmPaciente.RellenarDatos(paciente, estudio, modalidad);
                     frmPaciente.Show();
@@ -116,7 +115,7 @@ namespace Dicom
         {
             string fecha = monthCalendar1.SelectionRange.Start.ToString("s");
 
-            dgvAgendamiento.DataSource = EstudioControl.BuscarEstudiosEnFecha(fecha);
+            dgvAgendamiento.DataSource = EstudioControl.BuscarEstudiosEnFecha(fecha, 0, 0);
         }
 
         private void button2_Click(object sender, EventArgs e)
