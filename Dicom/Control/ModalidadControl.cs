@@ -24,5 +24,33 @@ namespace Dicom.Control
                 return null;
             }
         }
+
+        public static int BuscarModalidad(string descripcion)
+        {
+            DataTable codigo_modalidad = new DataTable();
+            string sql = "SELECT codigo_modalidad FROM modalidad WHERE descripcion = '" + descripcion + "'";
+
+            try
+            {
+                codigo_modalidad = Conexion.Seleccionar(sql);
+
+                if (codigo_modalidad.Rows.Count > 0)
+                {
+                    int codigo = Convert.ToInt32(codigo_modalidad.Rows[0][0]);
+                    return codigo;
+                }
+                else
+                {
+                    Consola.Imprimir("No existe descripción de la modalidad en la base de datos");
+                    return -1;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Consola.Imprimir("Ha ocurrido una excepción " + e.Message);
+                return -1;
+            }
+        }
     }
 }
