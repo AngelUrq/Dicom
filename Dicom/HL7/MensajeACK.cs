@@ -41,7 +41,7 @@ namespace Dicom.HL7
 
                 MSA += "MSA" + Convert.ToString(MSH["Field Separator"]) + tipoACK + Convert.ToString(MSH["Field Separator"]) + MSH[DefinicionSegmento.MSH[10]];
 
-                return encabezado + "\n" + MSA;
+                return encabezado + "\r" + MSA;
             }
             else
             {
