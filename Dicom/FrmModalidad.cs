@@ -41,12 +41,5 @@ namespace Dicom
         {
             dgvAgendamiento.DataSource = EstudioControl.SeleccionarEstudiosPorFechaYModalidad(codigoModalidad, monthCalendar1.SelectionRange.Start.ToString("s"));
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-    
-            
-        }
     }
 }
