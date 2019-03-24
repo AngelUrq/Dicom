@@ -13,12 +13,21 @@ namespace Dicom.Servicios
         private readonly string ip;
         private readonly int puerto;
 
+        /// <summary>
+        /// Constructor Cliente
+        /// </summary>
+        /// <param name="ip">IP a la que enviar</param>
+        /// <param name="puerto">Puerto</param>
         public Cliente(string ip, int puerto)
         {
             this.ip = ip;
             this.puerto = puerto;
         }
 
+        /// <summary>
+        /// Enviar mensaje a través del socket
+        /// </summary>
+        /// <param name="mensaje">Mensaje a enviar</param>
         public void EnviarMensaje(string mensaje)
         {
             try
