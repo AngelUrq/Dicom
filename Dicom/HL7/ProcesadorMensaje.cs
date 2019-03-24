@@ -1,4 +1,6 @@
 ﻿using Dicom.Control;
+using Dicom.Entidades;
+using Dicom.Herramientas;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -103,7 +105,90 @@ namespace Dicom.HL7
 
         private void ProcesarOrden(List<Hashtable> lista)
         {
-            listo = true;
+            bool correcto = true;
+
+            int codigo_paciente = -1;
+            int codigo_modalidad = -1;
+            string numero_acceso = GeneradorIdentificadores.GenerarAccessionNumber();
+            string medico_referencia = "";
+            string medico_ejercicio = "";
+            bool admitido = false;
+            bool cancelado = false;
+            DateTime fecha_inicio = DateTime.Now;
+            DateTime fecha_fin = DateTime.Now;
+
+            foreach (Hashtable segmento in lista)
+            {
+                if (segmento["Segment Name"].Equals("PID"))
+                {
+                    bool pacienteCorrecto = VerificarPaciente(segmento);
+
+                    if (pacienteCorrecto)
+                        codigo_paciente = Convert.ToInt32((((string) segmento["Patient ID (Internal ID)"]).Split('^'))[0]);
+
+                    correcto = correcto && pacienteCorrecto;
+                }
+
+                if (segmento["Segment Name"].Equals("OBR"))
+                {
+                    if (segmento.ContainsKey("Diagnostic Serv Sect ID"))
+                    {
+                        codigo_modalidad = ModalidadControl.BuscarModalidad((string) segmento["Diagnostic Serv Sect ID"]);
+
+                        if (codigo_modalidad == -1)
+                        {
+                            Consola.Imprimir("No existe ese Diagnostic Serv Sect ID");
+                            correcto = false;
+                        }
+                    }
+                    else
+                    {
+                        Consola.Imprimir("El mensaje no tiene el Diagnostic Serv Sect ID");
+                        correcto = false;
+                    }
+
+                    if (segmento.ContainsKey("Observation Date/Time") && segmento.ContainsKey("Observation End Date/Time"))
+                    {
+                        fecha_inicio = ConversorFechas.ConvertirFechaHL7((string)segmento["Observation Date/Time"]);
+                        fecha_fin = ConversorFechas.ConvertirFechaHL7((string)segmento["Observation End Date/Time"]);
+                    }
+                    else
+                    {
+                        Consola.Imprimir("La orden debe tener hora inicio y hora fin");
+                        correcto = false;
+                    }
+                }
+
+                if (segmento["Segment Name"].Equals("PV1"))
+                {
+                    if (segmento.ContainsKey("Attending Doctor"))
+                        medico_ejercicio = (string) segmento["Attending Doctor"];
+                    if (segmento.ContainsKey("Referring Doctor"))
+                        medico_referencia = (string)segmento["Referring Doctor"];
+                }
+            }
+
+            if (correcto)
+            {
+                Consola.Imprimir("Procesamiento de ORM exitoso");
+
+                Estudio estudio = new Estudio(codigo_paciente,codigo_modalidad,numero_acceso,medico_referencia,medico_ejercicio,admitido,cancelado,fecha_inicio,fecha_fin);
+
+                EstudioControl.Insertar(estudio);
+            }
+            else
+            {
+                listo = false;
+                Consola.Imprimir("Procesamiento de ORM fallido");
+            }
+        }
+
+        private bool VerificarPaciente(Hashtable pid)
+        {
+            if (pid.ContainsKey("Patient ID (Internal ID)"))
+                return PacienteControl.VerificarPacienteExistente(pid);
+
+            return false;
         }
 
         private string BuscarTipoMensaje(List<Hashtable> lista)

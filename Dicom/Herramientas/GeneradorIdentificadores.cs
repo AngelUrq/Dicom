@@ -23,9 +23,6 @@ namespace Dicom.Herramientas
             Consola.Imprimir(finalString);
 
             return finalString;
-
-
-     
         }
 
     }

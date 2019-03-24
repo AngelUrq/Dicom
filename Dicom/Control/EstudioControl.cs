@@ -18,7 +18,7 @@ namespace Dicom.Control
 
             if (VerificarHorario(estudio))
             {
-                string SQL = "INSERT INTO estudio(codigo_paciente,codigo_modalidad,numero_acceso,medico_referencia,medico_ejercicio,cancelado,admitido,fecha_inicio,fecha_fin) VALUES('" + estudio.CodigoPaciente + "','" + GeneradorIdentificadores.GenerarAccessionNumber() + "','" + estudio.NumeroDeAcceso + "','" + estudio.MedicoDeReferencia + "','" + estudio.MedicoDeEjercicio + "'," + estudio.Cancelado + "," + estudio.Admitido + ",'" + estudio.FechaInicio.ToString("s") + "','" + estudio.FechaFin.ToString("s") + "')";
+                string SQL = "INSERT INTO estudio(codigo_paciente,codigo_modalidad,numero_acceso,medico_referencia,medico_ejercicio,cancelado,admitido,fecha_inicio,fecha_fin) VALUES('" + estudio.CodigoPaciente + "','" + estudio.CodigoModalidad + "','" + estudio.NumeroDeAcceso + "','" + estudio.MedicoDeReferencia + "','" + estudio.MedicoDeEjercicio + "'," + estudio.Cancelado + "," + estudio.Admitido + ",'" + estudio.FechaInicio.ToString("s") + "','" + estudio.FechaFin.ToString("s") + "')";
 
                 try
                 {
@@ -34,7 +34,26 @@ namespace Dicom.Control
 
         public static bool VerificarHorario(Estudio estudio)
         {
-            return true;
+            string SQL = "SELECT * FROM estudio WHERE ((estudio.fecha_inicio BETWEEN '" + estudio.FechaInicio.ToString("s") + "' AND '" + estudio.FechaFin.ToString("s") + "') OR (estudio.fecha_fin BETWEEN '" + estudio.FechaInicio.ToString("s") + "' AND '" + estudio.FechaFin.ToString("s") + "')) AND estudio.codigo_modalidad = " + estudio.CodigoModalidad;
+
+            try
+            {
+                DataTable consulta = Conexion.Seleccionar(SQL);
+
+                if (consulta.Rows.Count == 0)
+                {
+                    Consola.Imprimir("El horario es aceptado.");
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Consola.Imprimir(e.ToString());
+                MessageBox.Show("Error al consultar en la base de datos");
+            }
+
+            Consola.Imprimir("El horario no fue aceptado.");
+            return false;
         }
 
         public static DataTable BuscarEstudios()
