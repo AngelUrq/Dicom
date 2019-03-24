@@ -75,21 +75,28 @@ namespace Dicom.HL7
             {
                 if (segmento["Segment Name"].Equals("PID"))
                 {
-                    Consola.Imprimir("Insertando paciente...");
-
-                    try
+                    if (segmento.ContainsKey("Patient ID (Internal ID)"))
                     {
-                        PacienteControl.Insertar(segmento);
-                        Consola.Imprimir("Paciente insertado.");
+                        Consola.Imprimir("Insertando paciente...");
 
-                        listo = true;
+                        try
+                        {
+                            PacienteControl.Insertar(segmento);
+                            Consola.Imprimir("Paciente insertado.");
+
+                            listo = true;
+                        }
+                        catch (Exception e)
+                        {
+                            Consola.Imprimir(e.ToString());
+                        }
+
+                        break;
                     }
-                    catch (Exception e)
+                    else
                     {
-                        Consola.Imprimir(e.ToString());
+                        Consola.Imprimir("Faltan campos obligatorios en el PID...");
                     }
-                    
-                    break;
                 }
             }
         }
