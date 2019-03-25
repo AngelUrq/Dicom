@@ -55,7 +55,11 @@ namespace Dicom.HL7
         private void ProcesarTipoMensaje(List<Hashtable> lista)
         {
             Consola.Imprimir("Mensaje separado correctamente.");
-            string tipoMensaje = BuscarTipoMensaje(lista);
+            string[] tipoMensajeCompleto = BuscarTipoMensaje(lista).Split('^');
+            string tipoMensaje = "";
+
+            if (tipoMensajeCompleto.Length >= 2)
+                tipoMensaje = tipoMensajeCompleto[0] + "^" + tipoMensajeCompleto[1];
 
             switch (tipoMensaje)
             {
@@ -77,7 +81,7 @@ namespace Dicom.HL7
             {
                 if (segmento["Segment Name"].Equals("PID"))
                 {
-                    if (segmento.ContainsKey("Patient ID (Internal ID)"))
+                    if (segmento.ContainsKey("Patient ID"))
                     {
                         Consola.Imprimir("Insertando paciente...");
 

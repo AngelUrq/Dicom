@@ -8,7 +8,7 @@ namespace Dicom.Entidades
 {
 	public class Paciente
 	{
-		public int Codigo_Paciente { get; set; }
+		public string Codigo_Paciente { get; set; }
 		public string Nombres { get; set; }
 		public string Apellido_Paterno { get; set; }
 		public string Apellido_Materno { get; set; }
@@ -18,7 +18,7 @@ namespace Dicom.Entidades
 		public string Codigo_Pais { get; set; }
 		public string Telefono { get; set; }
 
-		public Paciente(int codigo_Paciente, string nombres, string apellido_Paterno, string apellido_Materno, string genero, string direccion, DateTime fecha_Nacimiento, string codigo_Pais, string telefono)
+		public Paciente(string codigo_Paciente, string nombres, string apellido_Paterno, string apellido_Materno, string genero, string direccion, DateTime fecha_Nacimiento, string codigo_Pais, string telefono)
 		{
 			Codigo_Paciente = codigo_Paciente;
 			Nombres = nombres;

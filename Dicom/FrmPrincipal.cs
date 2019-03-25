@@ -44,7 +44,7 @@ namespace Dicom
                 PacienteControl pacienteControl = new PacienteControl();
                 try
                 {
-                    int codigoPaciente = (int)dgvAgendamiento.SelectedCells[0].Value;
+                    string codigoPaciente = (string)dgvAgendamiento.SelectedCells[0].Value;
                     
                     Paciente paciente = PacienteControl.BuscarPaciente(codigoPaciente);
                     Estudio estudio = new Estudio(Convert.ToInt32(dgvAgendamiento.SelectedCells[9].Value), dgvAgendamiento.SelectedCells[8].Value.ToString(), dgvAgendamiento.SelectedCells[12].Value.ToString(), dgvAgendamiento.SelectedCells[13].Value.ToString(), Convert.ToDateTime(dgvAgendamiento.SelectedCells[10].Value));

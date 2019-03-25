@@ -1,5 +1,6 @@
 ﻿using Dicom.Entidades;
 using Dicom.Excepciones;
+using Dicom.Herramientas;
 using Dicom.HL7;
 using System;
 using System.Collections;
@@ -22,13 +23,36 @@ namespace Dicom.Control
             {
                 Paciente paciente = new Paciente();
                 string[] nombres = lista["Patient Name"].ToString().Split('^');
-                string resultado = DateTime.ParseExact(lista["Date / Time of Birth"].ToString(), "yyyyMMdd",
-                    CultureInfo.InvariantCulture).ToString("yyyy/MM/dd");
 
-                DateTime pDate = Convert.ToDateTime(resultado);
-                string fecha = pDate.ToString("yyyy-MM-dd hh:mm:ss");
+                string resultado = "";
+                string fecha = "";
+                string paciente_id = "";
+                string genero = "";
+                string direccion = "";
+                string telefono = "";
 
-                string sql = "INSERT INTO paciente VALUES ('" + lista["Patient ID (Internal ID)"] + "','" + nombres[1] + "','" + nombres[0] + "','" + "" + "','" + lista["Sex"] + "','" + lista["Patient Address"].ToString().Replace("^", " ") + "' ,'" + fecha + "',' " + "','" + lista["Phone Number – Home"] + "')";
+                if (lista.ContainsKey("Date/Time Of Birth"))
+                {
+                    resultado = DateTime.ParseExact(lista["Date/Time Of Birth"].ToString(), "yyyyMMdd", CultureInfo.InvariantCulture).ToString("yyyy/MM/dd");
+                    DateTime pDate = Convert.ToDateTime(resultado);
+                    fecha = pDate.ToString("yyyy-MM-dd hh:mm:ss");
+                }
+
+                if (lista.ContainsKey("Patient ID"))
+                    paciente_id = (string) lista["Patient ID"];
+                else
+                    paciente_id = GeneradorIdentificadores.GenerarAccessionNumber();
+
+                if (lista.ContainsKey("Administrative Sex"))
+                    genero = (string) lista["Administrative Sex"];
+
+                if (lista.ContainsKey("Patient Address"))
+                    direccion = (string) lista["Patient Address"];
+
+                if (lista.ContainsKey("Phone Number – Home"))
+                    telefono = (string) lista["Phone Number – Home"];
+
+                string sql = "INSERT INTO paciente VALUES ('" + paciente_id + "','" + nombres[1] + "','" + nombres[0] + "','" + "" + "','" + genero + "','" + direccion.Replace("^", " ") + "' ,'" + fecha + "',' " + "','" + telefono + "')";
                 Conexion.Ejecutar(sql);
             }
             else
@@ -39,10 +63,9 @@ namespace Dicom.Control
 
         public static bool VerificarPacienteExistente(Hashtable PID_LECTURA)
         {
-            string codigoInterno = (((string)PID_LECTURA[DefinicionSegmento.PID[3]]).Split('^'))[0];
-
-            int codigoPaciente =  Convert.ToInt32(codigoInterno);
-            string sql = "SELECT * FROM paciente WHERE codigo_paciente = " + codigoPaciente;
+            string codigoPaciente = (((string)PID_LECTURA[DefinicionSegmento.PID[2]]).Split('^'))[0];
+            
+            string sql = "SELECT * FROM paciente WHERE codigo_paciente = '" + codigoPaciente + "'";
 
             try
             {
@@ -58,7 +81,7 @@ namespace Dicom.Control
 
         }
 
-        public static Paciente BuscarPaciente(int codigoPaciente)
+        public static Paciente BuscarPaciente(string codigoPaciente)
         {
             string sql = "SELECT * FROM paciente WHERE codigo_paciente = " + codigoPaciente;
 
