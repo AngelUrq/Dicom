@@ -17,7 +17,7 @@ namespace Dicom.HL7
 
                 for (int i = 2; i < DefinicionSegmento.MSH.Count; i++)
                 {
-                    if (MSH[DefinicionSegmento.MSH[i]] != null && i < MSH.Count - 1)
+                    if (MSH[DefinicionSegmento.MSH[i]] != null && i < MSH.Count - 1 && i != 2 && i != 3 && i != 4 && i != 5 && i != 9)
                     {
                         encabezado += MSH[DefinicionSegmento.MSH[i]] + Convert.ToString(MSH["Field Separator"]);
                     }
@@ -32,6 +32,20 @@ namespace Dicom.HL7
                             encabezado += "";
                         }
 
+                    }
+                    else if (i == 2)
+                    {
+                        encabezado += MSH[DefinicionSegmento.MSH[i + 2]] + Convert.ToString(MSH["Field Separator"]) + MSH[DefinicionSegmento.MSH[i + 3]] + Convert.ToString(MSH["Field Separator"]) + MSH[DefinicionSegmento.MSH[i]] + Convert.ToString(MSH["Field Separator"]) + MSH[DefinicionSegmento.MSH[i + 1]] + Convert.ToString(MSH["Field Separator"]);
+                    }
+                    else if (i == 9)
+                    {
+                        string[] tipoMensajeCompleto = MSH[DefinicionSegmento.MSH[i]].ToString().Split('^');
+                        string tipoMensaje = "";
+
+                        if (tipoMensajeCompleto.Length >= 2)
+                            tipoMensaje = "ACK^" + tipoMensajeCompleto[1];
+
+                        encabezado += tipoMensaje + Convert.ToString(MSH["Field Separator"]);
                     }
                     else
                     {
