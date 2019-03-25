@@ -153,7 +153,7 @@ namespace Dicom.HL7
 
                     if (version != null)
                     {
-                        Regex regex = new Regex(@"2.\d");
+                        Regex regex = new Regex(@"2.4");
                         Match match = regex.Match(version);
 
                         if (match.Success)

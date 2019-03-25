@@ -9,7 +9,6 @@ namespace Dicom.HL7
 {
     class DefinicionSegmento
     {
-
         public static readonly Hashtable MSH = new Hashtable
         {
             { 0, "MSH" },
@@ -31,9 +30,11 @@ namespace Dicom.HL7
             { 16, "Application Acknowledgement Type"},
             { 17, "Country Code"},
             { 18, "Character Set" },
-            { 19, "Principal Language of Message" }
+            { 19, "Principal Language of Message" },
+            { 20, "Alternate Character Set Handling Scheme" },
+            { 21, "Conformance Statement ID" }
         };
-
+        
         public static readonly Hashtable EVN = new Hashtable
         {
             { 0, "EVN" },
@@ -43,31 +44,32 @@ namespace Dicom.HL7
             { 4, "Event Reason Code" },
             { 5, "Operator ID" },
             { 6, "Event Occurred" },
+            { 7, "Event Facility" }
         };
-
+        
         public static readonly Hashtable PID = new Hashtable
         {
             { 0, "PID" },
-            { 1, "Set ID-Patient ID" },
-            { 2, "Patient ID (External ID)"},
-            { 3, "Patient ID (Internal ID)"},
-            { 4, "Alternate Patient ID-PID"},
+            { 1, "Set ID - PID"},
+            { 2, "Patient ID"},
+            { 3, "Patient Identifier List"},
+            { 4, "Alternate Patient ID - PID"},
             { 5, "Patient Name"},
             { 6, "Mother's Maiden Name"},
-            { 7, "Date / Time of Birth"},
-            { 8, "Sex"},
+            { 7, "Date/Time Of Birth"},
+            { 8, "Administrative Sex"},
             { 9, "Patient Alias"},
             { 10, "Race"},
-            { 11, "Patient Address" },
-            { 12, "Country Code" },
-            { 13, "Phone Number – Home" },
-            { 14, "Phone Number – Business" },
-            { 15, "Primary Language" },
-            { 16, "Marital Status" },
-            { 17, "Religion" },
-            { 18, "Patient Account Number" },
-            { 19, "SSN Number – Patient" },
-            { 20, "Driver's License Number-Patient"},
+            { 11, "Patient Address"},
+            { 12, "County Code"},
+            { 13, "Phone Number - Home"},
+            { 14, "Phone Number - Business"},
+            { 15, "Primary Language"},
+            { 16, "Marital Status"},
+            { 17, "Religion"},
+            { 18, "Patient Account Number"},
+            { 19, "SSN Number - Patient"},
+            { 20, "Driver's License Number - Patient"},
             { 21, "Mother's Identifier"},
             { 22, "Ethnic Group"},
             { 23, "Birth Place"},
@@ -78,8 +80,16 @@ namespace Dicom.HL7
             { 28, "Nationality"},
             { 29, "Patient Death Date and Time"},
             { 30, "Patient Death Indicator"},
+            { 31, "Identity Unknown Indicator"},
+            { 32, "Identity Reliability Code"},
+            { 33, "Last Update Date/Time"},
+            { 34, "Last Update Facility"},
+            { 35, "Species Code"},
+            { 36, "Breed Code"},
+            { 37, "Strain"},
+            { 38, "Production Class Code"},
         };
-
+        
         public static readonly Hashtable PV1 = new Hashtable
         {
             { 0, "PV1" },
@@ -136,7 +146,7 @@ namespace Dicom.HL7
             { 51, "Visit Indicator"},
             { 52, "Other Healthcare Provider"},
         };
-
+        
         public static readonly Hashtable IN1 = new Hashtable
         {
             { 0, "IN1" },
@@ -190,7 +200,7 @@ namespace Dicom.HL7
             { 48, "Handicap"},
             { 49, "Insured’s ID Number"},
         };
-
+        
         public static readonly Hashtable IN2 = new Hashtable
         {
             { 0, "IN2" },
@@ -267,7 +277,7 @@ namespace Dicom.HL7
             { 71, "Race"},
             { 72, "Patient's Relationship To Insured"},
         };
-
+        
         private static readonly Hashtable ORC = new Hashtable
         {
             { 0, "ORC" },
@@ -295,63 +305,61 @@ namespace Dicom.HL7
             { 22, "Ordering Facility Address"},
             { 23, "Ordering Facility Phone Number"},
             { 24, "Ordering Provider Address"},
-            { 25, "Order Status Modifier"},
-            { 26, "Advanced Beneficiary Notice Override Reason"},
-            { 27, "Filler's Expected Availability Date/Time"},
-            { 28, "Confidentiality Code"},
-            { 29, "Order Type"},
-            { 30, "Enterer Authorization Mode"},
-            { 31, "Parent Universal Service Identifier"},
+            { 25, "Order Status Modifier"}
         };
-
+        
         public static readonly Hashtable OBR = new Hashtable
         {
             { 0, "OBR" },
             { 1, "Set ID - OBR"},
             { 2, "Placer Order Number"},
             { 3, "Filler Order Number"},
-            { 4, "Universal Service ID"},
+            { 4, "Universal Service Identifier"},
             { 5, "Priority"},
-            { 6, "Requested Date/time"},
-            { 7, "Observation Date/Time"},
-            { 8, "Observation End Date/Time"},
-            { 9, "Collection Volume"},
-            { 10, "Collector Identifier"},
-            { 11, "Specimen Action Code"},
+            { 6, "Requested Date/Time"},
+            { 7, "Observation Date/Time  "},
+            { 8, "Observation End Date/Time "},
+            { 9, "Collection Volume *"},
+            { 10, "Collector Identifier *"},
+            { 11, "Specimen Action Code *"},
             { 12, "Danger Code"},
             { 13, "Relevant Clinical Info."},
-            { 14, "Specimen Received Date/Time"},
+            { 14, "Specimen Received Date/Time *"},
             { 15, "Specimen Source"},
             { 16, "Ordering Provider"},
             { 17, "Order Callback Phone Number"},
-            { 18, "Placer field 1"},
-            { 19, "Placer field 2"},
-            { 20, "Filler Field 1"},
-            { 21, "Filler Field 2"},
-            { 22, "Results Rpt/Status Chng &#8211; Date/Time"},
-            { 23, "Charge to Practice"},
+            { 18, "Placer Field 1"},
+            { 19, "Placer Field 2"},
+            { 20, "Filler Field 1 +"},
+            { 21, "Filler Field 2 +"},
+            { 22, "Results Rpt/Status Chng - Date/Time +"},
+            { 23, "Charge to Practice +"},
             { 24, "Diagnostic Serv Sect ID"},
-            { 25, "Result Status"},
-            { 26, "Parent Result"},
+            { 25, "Result Status +"},
+            { 26, "Parent Result +"},
             { 27, "Quantity/Timing"},
             { 28, "Result Copies To"},
-            { 29, "Parent"},
+            { 29, "Parent Number"},
             { 30, "Transportation Mode"},
             { 31, "Reason for Study"},
-            { 32, "Principal Result Interpreter"},
-            { 33, "Assistant Result Interpreter"},
-            { 34, "Technician"},
-            { 35, "Transcriptionist"},
-            { 36, "Scheduled Date/Time"},
-            { 37, "Number of Sample Containers"},
-            { 38, "Transport Logistics of Collected Sample"},
-            { 39, "Collector’s Comment"},
+            { 32, "Principal Result Interpreter +"},
+            { 33, "Assistant Result Interpreter +"},
+            { 34, "Technician +"},
+            { 35, "Transcriptionist +"},
+            { 36, "Scheduled Date/Time +"},
+            { 37, "Number of Sample Containers *"},
+            { 38, "Transport Logistics of Collected Sample *"},
+            { 39, "Collector's Comment *"},
             { 40, "Transport Arrangement Responsibility"},
             { 41, "Transport Arranged"},
             { 42, "Escort Required"},
             { 43, "Planned Patient Transport Comment"},
+            { 44, "Procedure Code"},
+            { 45, "Procedure Code Modifier"},
+            { 46, "Placer Supplemental Service Information"},
+            { 47, "Filler Supplemental Service Information"},
         };
-
+        
         public static readonly Hashtable OBX = new Hashtable
         {
             { 0, "OBX" },
@@ -372,8 +380,10 @@ namespace Dicom.HL7
             { 15, "Producer’s Id"},
             { 16, "Responsible Observer"},
             { 17, "Observation Method"},
+            { 18, "Equipment Instance Identifier"},
+            { 19, "Date/Time of the Analysis"},
         };
-
+        
         public static readonly Hashtable NTE = new Hashtable
         {
             { 0, "NTE" },
@@ -432,9 +442,7 @@ namespace Dicom.HL7
             { 44, "Organ Donor Code"},
             { 45, "Advance Directive Code"},
             { 46, "Patient Status Effective Date"},
-            { 47, "Expected LOA Return Date/Time"},
-            { 48, "Expected Pre-admission Testing Date/Time"},
-            { 49, "Notify Clergy Code"},
+            { 47, "Expected LOA Return Date/Time"}
         };
 
         public static readonly List<Hashtable> listaSegmentos = new List<Hashtable>

@@ -170,6 +170,8 @@ namespace Dicom.HL7
 
             if (correcto)
             {
+                listo = true;
+
                 Consola.Imprimir("Procesamiento de ORM exitoso");
 
                 Estudio estudio = new Estudio(codigo_paciente,codigo_modalidad,numero_acceso,medico_referencia,medico_ejercicio,admitido,cancelado,fecha_inicio,fecha_fin);
