@@ -15,7 +15,11 @@ namespace Dicom.Servicios
 {
     class Servidor
     {
+        /// <summary>
+        /// IP del servidor al que llegaran los mensajes HL7
+        /// </summary>
         private readonly string IP = "192.168.43.88";
+
         private readonly int PUERTO = 52000;
         private readonly int PUERTO_CLIENTE = 25000;
         private readonly int CONEXIONES_MAXIMAS = 10;
@@ -87,7 +91,7 @@ namespace Dicom.Servicios
                 }
             } catch(Exception e)
             {
-                Consola.Imprimir("Ocurrió un problema al iniciar el puerto.");
+                Consola.Imprimir("Ocurrió un problema al iniciar el servidor.");
                 Consola.Imprimir(e.ToString());
             }
         }
