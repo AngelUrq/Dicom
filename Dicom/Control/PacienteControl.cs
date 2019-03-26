@@ -16,7 +16,10 @@ namespace Dicom.Control
 {
 	class PacienteControl
 	{
-
+        /// <summary>
+        /// Inserta un paciente en la base de datos
+        /// </summary>
+        /// <param name="lista">Datos del paciente</param>
 		public static void Insertar(Hashtable lista)
 		{
             if (!VerificarPacienteExistente(lista))
@@ -61,6 +64,11 @@ namespace Dicom.Control
             }
 		}
 
+        /// <summary>
+        /// Verifica si el paciente existe
+        /// </summary>
+        /// <param name="PID_LECTURA">Datos del paciente</param>
+        /// <returns>Verdadero o falso</returns>
         public static bool VerificarPacienteExistente(Hashtable PID_LECTURA)
         {
             string codigoPaciente = (((string)PID_LECTURA[DefinicionSegmento.PID[2]]).Split('^'))[0];
@@ -81,6 +89,11 @@ namespace Dicom.Control
 
         }
 
+        /// <summary>
+        /// Busca el paciente según su código
+        /// </summary>
+        /// <param name="codigoPaciente">Código de paciente</param>
+        /// <returns></returns>
         public static Paciente BuscarPaciente(string codigoPaciente)
         {
             string sql = "SELECT * FROM paciente WHERE codigo_paciente = " + codigoPaciente;

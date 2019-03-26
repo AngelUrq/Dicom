@@ -71,12 +71,6 @@
     <Compile Include="Control\EstudioControl.cs" />
     <Compile Include="Control\ModalidadControl.cs" />
     <Compile Include="Control\PacienteControl.cs" />
-    <Compile Include="Control\Test.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Control\Test.Designer.cs">
-      <DependentUpon>Test.cs</DependentUpon>
-    </Compile>
     <Compile Include="Herramientas\GeneradorIdentificadores.cs" />
     <Compile Include="WorklistSCP\Model\IMppsSource.cs" />
     <Compile Include="WorklistSCP\Model\IWorklistItemsSource.cs" />
@@ -119,9 +113,6 @@
     <Compile Include="WorklistSCP\Worklist.cs" />
     <Compile Include="WorklistSCP\WorklistServer.cs" />
     <Compile Include="WorklistSCP\WorklistService.cs" />
-    <EmbeddedResource Include="Control\Test.resx">
-      <DependentUpon>Test.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmModalidad.resx">
       <DependentUpon>FrmModalidad.cs</DependentUpon>
     </EmbeddedResource>

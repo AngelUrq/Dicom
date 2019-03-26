@@ -17,12 +17,20 @@ namespace Dicom.HL7
 
         private char separadorSegmento;
 
+        /// <summary>
+        /// Constructor LectorHL7
+        /// </summary>
         public LectorHL7()
         {
             lista = new List<Hashtable>();
             valido = true;
         }
 
+        /// <summary>
+        /// Lee un mensaje HL7
+        /// </summary>
+        /// <param name="mensaje">Mensaje en formato texto</param>
+        /// <returns>Lista de hashtables con el mensaje separado</returns>
         public List<Hashtable> LeerMensaje(string mensaje)
         {
             DividirEnSegmentos(mensaje);
@@ -32,6 +40,10 @@ namespace Dicom.HL7
             return lista;
         }
         
+        /// <summary>
+        /// Divir en segmentos
+        /// </summary>
+        /// <param name="mensaje">Mensaje en formato texto</param>
         private void DividirEnSegmentos(string mensaje)
         {
             string[] segmentos = mensaje.Split('\r');
@@ -54,6 +66,11 @@ namespace Dicom.HL7
             }
         }
 
+        /// <summary>
+        /// Quita el primer elemento de un arreglo de segmentos
+        /// </summary>
+        /// <param name="segmentos">Arreglo de segmentos</param>
+        /// <returns>Arreglo sin el primer elemento</returns>
         private string[] QuitarPrimerElemento(string[] segmentos)
         {
             string[] nuevoSegmentos = new string[segmentos.Length - 1];
@@ -64,6 +81,10 @@ namespace Dicom.HL7
             return nuevoSegmentos;
         }
 
+        /// <summary>
+        /// Divir campos del message header
+        /// </summary>
+        /// <param name="segmento">Segmento en tipo texto</param>
         private void DividirEnCamposMSH(string segmento)
         {
             separadorSegmento = segmento[3];
@@ -81,6 +102,10 @@ namespace Dicom.HL7
             ElegirSegmento(camposConElSeparador);
         }
 
+        /// <summary>
+        /// Divide en campos el segmento
+        /// </summary>
+        /// <param name="segmento">Segmento en tipo texto</param>
         private void DividirEnCampos(string segmento)
         {
             string[] campos = segmento.Split(separadorSegmento);
@@ -88,6 +113,10 @@ namespace Dicom.HL7
             ElegirSegmento(campos);
         }
 
+        /// <summary>
+        /// Elegir segmento
+        /// </summary>
+        /// <param name="campos">Arreglo de campos</param>
         private void ElegirSegmento(string[] campos)
         {
             Hashtable definicionSegmento = BuscarSegmento(campos[0]);
@@ -103,6 +132,11 @@ namespace Dicom.HL7
             }
         }
 
+        /// <summary>
+        /// Asociar campos a su definición
+        /// </summary>
+        /// <param name="definicionSegmento">Definición del segmento</param>
+        /// <param name="campos">Campos a asignar</param>
         private void AsociarCampos(Hashtable definicionSegmento, string[] campos)
         {
             Hashtable tabla = new Hashtable();
@@ -132,6 +166,11 @@ namespace Dicom.HL7
             }
         }
 
+        /// <summary>
+        /// Busca segmento según su nombre
+        /// </summary>
+        /// <param name="nombreSegmento">Nombre del segmento</param>
+        /// <returns>Devuelve un hashtable con la información del segmento</returns>
         private Hashtable BuscarSegmento(string nombreSegmento)
         {
             foreach (Hashtable definicionSegmento in DefinicionSegmento.listaSegmentos)
@@ -143,6 +182,9 @@ namespace Dicom.HL7
             return null;
         }
 
+        /// <summary>
+        /// Comprueba la versión del mensaje
+        /// </summary>
         private void ComprobarVersion()
         {
             foreach (Hashtable segmento in lista)
@@ -175,7 +217,11 @@ namespace Dicom.HL7
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Getter
+        /// </summary>
+        /// <returns>Valido</returns>
         public bool EsValido()
         {
             return valido;

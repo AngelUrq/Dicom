@@ -20,6 +20,10 @@ namespace Dicom.HL7
 
         private bool listo;
         
+        /// <summary>
+        /// Constructor del procesador de mensajes
+        /// </summary>
+        /// <param name="mensaje">Mensaje a procesar</param>
         public ProcesadorMensaje(string mensaje)
         {
             lector = new LectorHL7();
@@ -28,6 +32,9 @@ namespace Dicom.HL7
             listo = false;
         }
 
+        /// <summary>
+        /// Empieza a procesar el mensaje
+        /// </summary>
         public void Empezar()
         {
             List<Hashtable> lista = lector.LeerMensaje(mensaje);
@@ -40,6 +47,10 @@ namespace Dicom.HL7
                 Consola.Imprimir("El mensaje no es válido");
         }
 
+        /// <summary>
+        /// Busca el MSH en la lista de hashtables
+        /// </summary>
+        /// <param name="lista">Lista de definiciones</param>
         public void BuscarMSH(List<Hashtable> lista)
         {
             foreach (Hashtable segmento in lista)
@@ -52,6 +63,10 @@ namespace Dicom.HL7
             }
         }
 
+        /// <summary>
+        /// Procesa un determinado tipo de mensaje
+        /// </summary>
+        /// <param name="lista">Lista de definiciones</param>
         private void ProcesarTipoMensaje(List<Hashtable> lista)
         {
             Consola.Imprimir("Mensaje separado correctamente.");
@@ -75,6 +90,10 @@ namespace Dicom.HL7
             }
         }
 
+        /// <summary>
+        /// Procesa la admisión de un paciente
+        /// </summary>
+        /// <param name="lista">Datos</param>
         private void ProcesarAdmision(List<Hashtable> lista)
         {
             foreach (Hashtable segmento in lista)
@@ -107,6 +126,10 @@ namespace Dicom.HL7
             }
         }
 
+        /// <summary>
+        /// Procesar estudio
+        /// </summary>
+        /// <param name="lista">Datos</param>
         private void ProcesarOrden(List<Hashtable> lista)
         {
             bool correcto = true;
@@ -191,6 +214,11 @@ namespace Dicom.HL7
             }
         }
 
+        /// <summary>
+        /// Verificar si existe un ID
+        /// </summary>
+        /// <param name="pid">PID</param>
+        /// <returns>Verdadero o falso</returns>
         private bool VerificarPaciente(Hashtable pid)
         {
             if (pid.ContainsKey("Patient ID"))
@@ -199,6 +227,11 @@ namespace Dicom.HL7
             return false;
         }
 
+        /// <summary>
+        /// Busca el tipo de mensaje
+        /// </summary>
+        /// <param name="lista">Datos</param>
+        /// <returns>Tipo de mensaje</returns>
         private string BuscarTipoMensaje(List<Hashtable> lista)
         {
             foreach (Hashtable segmento in lista)
@@ -212,6 +245,10 @@ namespace Dicom.HL7
             return "";
         }
         
+        /// <summary>
+        /// Obtiene el tipo de mensaje respuesta
+        /// </summary>
+        /// <returns>Tipo de mensaje respuesta</returns>
         public string ObtenerTipoMensajeRespuesta()
         {
             if (!lector.EsValido())

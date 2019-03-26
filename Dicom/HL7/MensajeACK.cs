@@ -9,6 +9,12 @@ namespace Dicom.HL7
 {
     class MensajeACK
     {
+        /// <summary>
+        /// Genera un mensaje de acknowledgement
+        /// </summary>
+        /// <param name="tipoACK">Tipo de mensaje</param>
+        /// <param name="MSH">Información del MSH</param>
+        /// <returns></returns>
         public static string GenerarMensaje(string tipoACK, Hashtable MSH) {
             if (MSH != null)
             {

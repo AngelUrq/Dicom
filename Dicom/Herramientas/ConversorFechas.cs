@@ -9,6 +9,11 @@ namespace Dicom.Herramientas
 {
 	class ConversorFechas
 	{
+        /// <summary>
+        /// Convierte fechas
+        /// </summary>
+        /// <param name="fecha">Fecha</param>
+        /// <returns></returns>
 		public static string Convertir_fecha(string fecha)
 		{
 			string resultado = DateTime.ParseExact(fecha, "yyyyMMdd",
@@ -19,6 +24,11 @@ namespace Dicom.Herramientas
 			return fechaNueva;
 		}
 
+        /// <summary>
+        /// Convierte fechas
+        /// </summary>
+        /// <param name="fecha">Fecha en formato texto</param>
+        /// <returns></returns>
         public static DateTime ConvertirFechaHL7(string fecha)
         {
             if (fecha.Length == 4)

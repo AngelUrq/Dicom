@@ -10,7 +10,11 @@ namespace Dicom.Control
 {
 	class Conexion
 	{
-		//metodo para buscar en la base de datos 
+		/// <summary>
+        /// Seleccionar en la base de datos
+        /// </summary>
+        /// <param name="sql">Consulta</param>
+        /// <returns></returns>
 		public static DataTable Seleccionar(string sql)
 		{
             Consola.Imprimir("Ejecutando consulta: " + sql);
@@ -27,7 +31,10 @@ namespace Dicom.Control
 			return dataTable;
 		}
 
-		//método para ejecutar una order sql en la base de datos
+		/// <summary>
+        /// Ejecutar en la base de datos
+        /// </summary>
+        /// <param name="sql">Consulta</param>
 		public static void Ejecutar(string sql)
 		{
             Consola.Imprimir("Ejecutando consulta: " + sql);

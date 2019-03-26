@@ -10,6 +10,10 @@ namespace Dicom.Control
 {
     class ModalidadControl
     {
+        /// <summary>
+        /// Lista las modalidades
+        /// </summary>
+        /// <returns>Tabla resultado</returns>
         public static DataTable Listar()
         {
             const string sql = "SELECT modalidad.codigo_modalidad AS 'CODIGO MODALIDAD', modalidad.nombre AS 'NOMBRE DE LA MODALIDAD', modalidad.descripcion AS 'DESCRIPCION' FROM modalidad";
@@ -25,6 +29,11 @@ namespace Dicom.Control
             }
         }
 
+        /// <summary>
+        /// Busca una modalidad según su código de HL7
+        /// </summary>
+        /// <param name="descripcion">Código de la modalidad en HL7</param>
+        /// <returns></returns>
         public static int BuscarModalidad(string descripcion)
         {
             DataTable codigo_modalidad = new DataTable();

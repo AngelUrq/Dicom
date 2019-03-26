@@ -8,6 +8,10 @@ namespace Dicom.Herramientas
 {
     class GeneradorIdentificadores
     {
+        /// <summary>
+        /// Genera un accession number aleatorio
+        /// </summary>
+        /// <returns>Accession number</returns>
         public static string GenerarAccessionNumber()
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
