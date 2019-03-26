@@ -17,7 +17,7 @@ namespace Dicom.Servicios
     {
         private readonly string IP = "192.168.43.88";
         private readonly int PUERTO = 52000;
-        private readonly int PUERTO_CLIENTE = 53000;
+        private readonly int PUERTO_CLIENTE = 25000;
         private readonly int CONEXIONES_MAXIMAS = 10;
 
         /// <summary>

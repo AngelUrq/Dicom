@@ -67,7 +67,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Archivos\Fichero.cs" />
     <Compile Include="Control\Conexion.cs" />
     <Compile Include="Control\EstudioControl.cs" />
     <Compile Include="Control\ModalidadControl.cs" />

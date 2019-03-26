@@ -111,7 +111,7 @@ namespace Dicom.HL7
         {
             bool correcto = true;
 
-            int codigo_paciente = -1;
+            string codigo_paciente = "";
             int codigo_modalidad = -1;
             string numero_acceso = GeneradorIdentificadores.GenerarAccessionNumber();
             string medico_referencia = "";
@@ -128,7 +128,9 @@ namespace Dicom.HL7
                     bool pacienteCorrecto = VerificarPaciente(segmento);
 
                     if (pacienteCorrecto)
-                        codigo_paciente = Convert.ToInt32((((string) segmento["Patient ID (Internal ID)"]).Split('^'))[0]);
+                        codigo_paciente = segmento["Patient ID"].ToString().Split('^')[0];
+                    else
+                        Consola.Imprimir("El paciente no existe.");
 
                     correcto = correcto && pacienteCorrecto;
                 }
@@ -191,7 +193,7 @@ namespace Dicom.HL7
 
         private bool VerificarPaciente(Hashtable pid)
         {
-            if (pid.ContainsKey("Patient ID (Internal ID)"))
+            if (pid.ContainsKey("Patient ID"))
                 return PacienteControl.VerificarPacienteExistente(pid);
 
             return false;

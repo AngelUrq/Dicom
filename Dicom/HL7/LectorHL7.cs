@@ -162,7 +162,7 @@ namespace Dicom.HL7
                         }
                         else
                         {
-                            Consola.Imprimir("La versión de HL7 no se acepta. Asegúrate de que el mensaje esté en 2.X");
+                            Consola.Imprimir("La versión de HL7 no se acepta. Asegúrate de que el mensaje esté en 2.4");
 
                             valido = false;
                         }

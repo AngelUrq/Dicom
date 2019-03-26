@@ -9,7 +9,7 @@ namespace Dicom.Entidades
     public class Estudio
     {
         public int CodigoEstudio { get; set; }
-        public int CodigoPaciente { get; set; }
+        public string CodigoPaciente { get; set; }
         public int CodigoModalidad { get; set; }
 
         public string NumeroDeAcceso { get; set; }
@@ -22,7 +22,7 @@ namespace Dicom.Entidades
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
 
-        public Estudio(int codigoEstudio, int codigoPaciente, int codigoModalidad, string numeroAcceso, string medicoReferencia, string medicoEjercicio, bool cancelado, bool admitido, DateTime fechaInicio, DateTime fechaFin)
+        public Estudio(int codigoEstudio, string codigoPaciente, int codigoModalidad, string numeroAcceso, string medicoReferencia, string medicoEjercicio, bool cancelado, bool admitido, DateTime fechaInicio, DateTime fechaFin)
         {
             CodigoEstudio = codigoEstudio;
             CodigoPaciente = codigoPaciente;
@@ -36,7 +36,7 @@ namespace Dicom.Entidades
             FechaFin = fechaFin;
         }
 
-        public Estudio(int codigoPaciente, int codigoModalidad, string numeroAcceso, string medicoReferencia, string medicoEjercicio, bool cancelado, bool admitido, DateTime fechaInicio, DateTime fechaFin)
+        public Estudio(string codigoPaciente, int codigoModalidad, string numeroAcceso, string medicoReferencia, string medicoEjercicio, bool cancelado, bool admitido, DateTime fechaInicio, DateTime fechaFin)
         {
             CodigoPaciente = codigoPaciente;
             CodigoModalidad = codigoModalidad;
